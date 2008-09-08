@@ -1,0 +1,7 @@
+*.log
+log
+pkg
+doc
+.DS_Store
+tmp
+*.pid

@@ -1,0 +1,10 @@
+#toc {
+  float: left;
+  border-style: solid;
+  margin-right: 10px;
+}
+
+#toc ol {
+  padding-left: 30px;
+  padding-right: 10px;
+}

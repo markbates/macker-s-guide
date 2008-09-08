@@ -1,0 +1,33 @@
+<h1>ChaptersController#show</h1>
+<p>You can find me in app/views/chapters/show.html.erb</p>
+
+
+<% code do -%>
+class CategoriesController &lt; App::ApplicationController
+  layout "core"
+
+  before_filter :login_required
+  before_filter :xhr_required, :only =&gt; [:create, :update]
+  before_filter :admin_privileges_required, :except =&gt; [:show]
+
+=begin
+  This method creates a category. Very difficult to understand, huh?
+=end
+  
+  # This is a comment
+  # This is another comment
+  def create  # create!
+    @category = Category.create(params[:category])
+    flash[:notice] = "Category #{@category + "..."} was successfully created"
+  end
+end
+<% end -%>
+
+<% code do -%>
+&gt;&gt; post.fecha?
+=&gt; false
+&gt;&gt; post.fecha = Time.now
+=&gt; Tue Sep 02 10:24:16 -0300 2008
+&gt;&gt; post.fecha? 
+=&gt; true
+<% end -%>
