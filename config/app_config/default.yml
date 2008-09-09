@@ -33,5 +33,5 @@ default_secret_key: S8R6TL5QKHJDFBFLLRRZ8NFLS5SL7NR4XFT57N6NLFXXPGBZM8C4WMRQMWRQ
 # 2.  run:  rake generate:javascript
 # mack::js_framework: jquery
 
-mack::use_sessions: false
+# mack::use_sessions: false
         
