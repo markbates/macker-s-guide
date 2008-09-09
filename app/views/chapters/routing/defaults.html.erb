@@ -30,4 +30,13 @@ end
   # => routes to UsersController#show, params[:id] == 1
 <% end -%>
 
+<p>Other 'basic' routes can be defined as follows:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.connect '/', :controller => :default, :action => :home_page
+  r.defaults
+end
+<% end -%>
+
 <p class="note">It's important to note that the 'default' routes will always be the last routes matched, regardless of where they are placed in the routes.rb file.</p>

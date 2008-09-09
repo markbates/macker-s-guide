@@ -1,1 +1,14 @@
 <% page_title('Named Routes') -%>
+
+<p>Named Routes allow you to define a name for a particular route that makes it easy to reference that route elsewhere in your code.</p>
+
+<p>Let's take a look at the following route definitions:</p>
+
+<% code do -%>
+Mack::Routes do |r|
+  r.home_page '/', :controller => :default, :action => :home_page
+  r.register '/signup', :controller => :users, :action => :new
+  r.do_register '/signup', :controller => :users, :action => :create, :method => :post
+  r.cart '/shopping/cart', :controller => :shopping_cart, :action => :show
+end
+<% end -%>
