@@ -8,7 +8,18 @@
 Mack::Routes do |r|
   r.home_page '/', :controller => :default, :action => :home_page
   r.register '/signup', :controller => :users, :action => :new
-  r.do_register '/signup', :controller => :users, :action => :create, :method => :post
   r.cart '/shopping/cart', :controller => :shopping_cart, :action => :show
+  r.show_user '/users/:id', :controller => :users, :action => :show
 end
 <% end -%>
+
+<p>Now that we've defined a handful of named routes we can now gain access to those routes through some helper methods in our views, controllers, and tests.</p>
+
+<% code do -%>
+home_page_url # => '/'
+register_url # => '/signup'
+cart_url # => '/shopping/cart'
+show_user_url(:id => 1) # => '/users/show/1'
+<% end -%>
+
+<p>Named routes make keeping code clean and easy to maintain. If later on we decide to change the url for where the shopping cart is, we don't need to change the rest of our code.</p>

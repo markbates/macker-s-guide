@@ -18,12 +18,15 @@
   </script>
 </head>
 <body>
+<% if Mack.env == 'production' -%>
 <div id="header">
   <div id="logo">
     <a href="http://www.mackframework.com" title="Mack Framework">Mack Framework</a>
     <h1>A Distributed Ruby Web Application Framework</h1>
   </div>
 </div>
+<% end -%>
+
 <div id="wrapper">
 
   <div id="toc"><%= render(:partial, 'chapters/toc') %></div>
@@ -39,9 +42,11 @@ dp.SyntaxHighlighter.ClipboardSwf = '/javascripts/clipboard.swf';
 dp.SyntaxHighlighter.HighlightAll('code');  
 </script>
 
+<% if Mack.env == 'production' -%>
 <div id="footer">
   <p>&copy; Mack Framework</p>
 </div>
+<% end -%>
 
 </body>
 </html>

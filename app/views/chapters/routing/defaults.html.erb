@@ -35,8 +35,11 @@ end
 <% code do -%>
 Mack::Routes.build do |r|
   r.connect '/', :controller => :default, :action => :home_page
+  r.connect '/hello/world', :controller => :default, :action => :home_page
   r.defaults
 end
 <% end -%>
 
-<p class="note">It's important to note that the 'default' routes will always be the last routes matched, regardless of where they are placed in the routes.rb file.</p>
+<p>Now when a route comes in to either '/' or '/hello/world' it will be directed to the DefaultController and the 'home_page' action.</p>
+
+<p class="note">NOTE: It's important to note that the 'default' routes will always be the last routes matched, regardless of where they are placed in the routes.rb file.</p>
