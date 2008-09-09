@@ -2,6 +2,13 @@ mack::site_domain: http://www.mackery.com
 log_level: error
 use_page_caching: true
 
+cachetastic_default_options:
+  debug: false
+  adapter: file
+  default_expiry: <%= 24.hours %>
+  store_options:
+    dir: <%= File.join(Mack.root, "tmp") %>
+
 # cachetastic_default_options:
 #     # this will dump into the log, configuration info for each cache, as well as the .inspect
 #     # for each object returned from the cache
