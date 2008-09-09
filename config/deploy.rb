@@ -59,7 +59,7 @@ namespace :deploy do
       else raise ArgumentError, "unknown migration target #{migrate_target.inspect}"
       end
 
-    run "cd #{directory}; #{rake} db:migrate##{mack_env}"
+    # run "cd #{directory}; #{rake} db:migrate##{mack_env}"
   end
   
   task :create_production_db, :roles => :db, :only => { :primary => true } do
