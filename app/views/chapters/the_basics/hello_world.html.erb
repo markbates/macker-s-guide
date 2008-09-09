@@ -1,0 +1,60 @@
+<% page_title('Hello World') -%>
+
+<p>Let's start looking at the basics of a Mack application by first generating one.</p>
+
+<% code do -%>
+$ mack my_first_app
+<% end -%>
+
+<p>The will generate a folder structure similar to this:</p>
+
+<% code(:fs) do -%>
+app/
+  controllers/
+    default_controller.rb
+  helpers/
+    controllers/
+      default_controller_helper.rb
+    views/
+      application_helper.rb
+  models/
+  views/
+    default/
+      index.html.erb
+    layouts/
+      application.html.erb
+config/
+  app_config/
+    default.yml
+    development.yml
+    production.yml
+    test.yml
+  database.yml
+  initializers/
+    gems.rb
+  routes.rb
+db/
+  migrations/
+lib/
+  tasks/
+public/
+  favicon.ico
+  images/
+  javascripts/
+  stylesheets/
+    scaffold.css
+Rakefile
+test/
+  controllers/
+    default_controller_spec.rb
+  helpers/
+    controllers/
+      default_controller_helper_spec.rb
+    views/
+      application_helper_spec.rb
+  models/
+  spec_helper.rb
+  spec.opts
+vendor/
+  plugins/
+<% end -%>

@@ -1,14 +1,10 @@
 <ol>
   <li>
-    <%= chapter("Getting Started", 'getting_started') %>
+    Getting Started
     <%= render(:partial, 'chapters/getting_started/toc') %>
   </li>
   <li>
-    The Basics
-    <ol>
-      <li>Controllers</li>
-      <li>Views</li>
-      <li>Routing</li>
-    </ol>
+    <%= chapter('The Basics', 'the_basics/index') %>
+    <%= render(:partial, 'chapters/the_basics/toc') %>
   </li>
 </ol>
