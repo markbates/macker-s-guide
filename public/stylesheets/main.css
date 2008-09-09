@@ -2,7 +2,8 @@ body {
   /*background-color: #e6e6e6; color: #333;*/
   text-align: center;
   min-width: 1px;
-  padding: 10px;
+  padding: 0px;
+  margin: 0px;
   font-family: Verdana;
   font-size: 12px;
 }
@@ -35,6 +36,55 @@ a:hover {
   text-align: left;
   width: 80%;
   padding: 4px;
+}
+
+#header { 
+  background: #000; 
+  border-bottom: 0.8em solid #a90000; 
+  color: #fff; 
+}
+
+#logo {
+  padding: 0px; 
+  
+  width: 72.8em; 
+  margin: 0 auto; 
+}
+
+#logo a { 
+  font: normal 5.0em "American Typewriter", "Trebuchet MS", Verdana, sans-serif; 
+  color: #fff;
+  text-decoration: none; 
+}
+
+#logo h1, #logo #tagline { 
+  display: none; 
+  font: normal 1.6em "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+
+#footer { 
+  padding: 0.8em 0; 
+  background: #000; 
+  border-top: 0.5em solid #a90000; 
+  color: #fff; 
+  clear: both;
+}
+
+#footer p { 
+  font-weight: bold; 
+  font-size: 1.0em; 
+  text-transform: uppercase; 
+  text-align: center; 
+}
+
+#footer a, #footer a:visited { 
+  color: #fff; 
+  border-bottom: 1px solid #a90000; 
+}
+
+#footer a:hover { 
+  color: #fff; 
+  border-bottom: 1px solid #fff; 
 }
 
 p {
