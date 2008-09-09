@@ -8,6 +8,17 @@ cachetastic_default_options:
   default_expiry: <%= 24.hours %>
   store_options:
     dir: <%= File.join(Mack.root, "tmp") %>
+  logging:
+    # n number of logs can be configured for a cache
+    # their names can be anything you want, it's doesn't matter
+    logger_1:
+      # this sets the type of log you want to write to.
+      # right now the only two options are file and console
+      type: file
+      # if the type is file, you need to configure where the log file is to be written.
+      file: log/memcached.log
+      # this sets the level of logging for this cache
+      level: error
 
 # cachetastic_default_options:
 #     # this will dump into the log, configuration info for each cache, as well as the .inspect
