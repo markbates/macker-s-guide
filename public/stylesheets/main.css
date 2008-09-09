@@ -1,10 +1,28 @@
+body { 
+  /*background-color: #e6e6e6; color: #333;*/
+  text-align: center;
+  min-width: 1px;
+  padding: 10px;
+}
+
 #toc {
-  float: left;
+  float: right;
   border-style: solid;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 #toc ol {
   padding-left: 30px;
   padding-right: 10px;
+}
+
+#main {
+/*  float: left;*/
+}
+
+#wrapper {
+  margin: 0 auto; 
+  text-align: left;
+  width: 80%;
+  padding: 4px;
 }

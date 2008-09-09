@@ -12,7 +12,7 @@ pre {
 	font-family: "Consolas", "Courier New", Courier, mono, serif;
 	font-size: 12px;
 	background-color: #000;
-	width: 99%;
+/*  width: 70%;*/
 	overflow: auto;
 	margin: 18px 0 18px 0 !important;
 	padding-top: 1px; /* adds a little border on top when controls are hidden */ 

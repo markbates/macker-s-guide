@@ -1,0 +1,18 @@
+<% page_title('Getting Started - Installing from GitHub.com') -%>
+
+<p>If you're the type of person that likes to build things from source, you like to live on the 'edge', or you feel like you might want to contribute, then this is a great way to get started.</p>
+
+<p>Before you can install Mack from GitHub.com, you're going to need to install Git. The web is abound with details on how to do this, so we're not going to get into that here, but if you need a place to start, here's a link to the <%= link_to('Git', 'http://git.or.cz/', :target => :_blank) %> home page.</p>
+
+<p>Once you have git installed here is how to download, and build Mack from GitHub.com:</p>
+
+<% code do -%>
+$ mkdir mack-framework
+$ cd mack-framework
+$ git clone git://github.com/markbates/mack.git
+$ git clone git://github.com/markbates/mack-more.git
+$ cd mack-more
+$ rake install
+$ cd ../mack
+$ rake install
+<% end -%>

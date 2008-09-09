@@ -12,6 +12,15 @@ module Mack
         concat("</pre>", block.binding)
       end
       
+      def chapter(title, view)
+        link_to(title, chapters_show_url(:view => view.gsub('/', '-')))
+      end
+      
+      def page_title(title = nil)
+        @page_title = title unless title.nil?
+        @page_title ||= 'The Macker\'s Guide to the Universe'
+      end
+      
     end
   end
 end

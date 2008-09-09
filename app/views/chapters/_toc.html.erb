@@ -1,6 +1,7 @@
 <ol>
   <li>
-    <%= link_to("Getting Started", chapters_show_url(:view => 'getting_started')) %>
+    <%= chapter("Getting Started", 'getting_started') %>
+    <%= render(:partial, 'chapters/getting_started/toc') %>
   </li>
   <li>
     The Basics
