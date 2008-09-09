@@ -45,3 +45,8 @@ p {
   color: #aeaeae;
   font-style: italic;
 }
+
+.note {
+  color: grey;
+  font-style: italic;
+}
