@@ -25,6 +25,10 @@ module Mack
         link_to(link, link, :target => :_blank)
       end
       
+      def mack_more
+        [:active_record, :caching, :data_factory, :data_mapper, :distributed, :encryption, :facets, :haml, :javascript, :localization, :markaby, :notifier, :orm, :pdf_writer]
+      end
+      
     end
   end
 end

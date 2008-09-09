@@ -1,16 +1,5 @@
 <ol>
-  <li>mack-active_record</li>
-  <li>mack-caching</li>
-  <li>mack-data_factory</li>
-  <li>mack-data_mapper</li>
-  <li>mack-distributed</li>
-  <li>mack-encryption</li>
-  <li>mack-facets</li>
-  <li>mack-haml</li>
-  <li>mack-javascript</li>
-  <li>mack-localization</li>
-  <li>mack-markaby</li>
-  <li>mack-notifier</li>
-  <li>mack-orm</li>
-  <li>mack-pdf_writer</li>
+  <% mack_more.each do |g| -%>
+  <li>mack-<%= g %></li>
+  <% end -%>
 </ol>

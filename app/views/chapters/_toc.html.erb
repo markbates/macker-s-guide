@@ -45,4 +45,13 @@
   </li>
   <li>Rails to Mack Cheat Sheet</li>
   <li>Contributing</li>
+  <li>
+    APIs
+    <ol>
+      <li><%= link_to('mack', 'http://api.mackframework.com/mack/', :target => :_blank) %></li>
+      <% mack_more.each do |g| -%>
+        <li><%= link_to("mack-#{g}", "http://api.mackframework.com/mack-#{g}/", :target => :_blank) %></li>
+      <% end -%>
+    </ol>
+  </li>
 </ol>
