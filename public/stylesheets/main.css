@@ -3,6 +3,16 @@ body {
   text-align: center;
   min-width: 1px;
   padding: 10px;
+  font-family: Verdana;
+  font-size: 12px;
+}
+
+a {
+  color: blue;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 #toc {
@@ -29,4 +39,9 @@ body {
 
 p {
   text-align: justify;
+}
+
+.option {
+  color: #aeaeae;
+  font-style: italic;
 }
