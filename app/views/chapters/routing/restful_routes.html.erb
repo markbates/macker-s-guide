@@ -1,0 +1,25 @@
+<% page_title('RESTful Routes') -%>
+
+<p>By default every route you define in Mack is <%= link_to('RESTful', 'http://en.wikipedia.org/wiki/Representational_State_Transfer', :target => :_blank) %>. Unless you specify a route, it will default to the HTTP verb GET.</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.home_page '/', :controller => :default, :action => :index
+  r.users_create '/users', :controller => :users, :action => :create, :method => :post
+end
+<% end -%>
+
+<p>In the above example when a request comes in that matches the url '/' and is of type GET then it will be sent to the <code>DefaultController</code> and the <code>index</code> action. If '/' comes in on ANY other HTTP verb, it will not be matched a <code>Mack::Errors::ResourceNotFound</code> error will be raised. The same holds true if a request comes in that matches '/users', if it's a POST then it will go to the <code>UsersController</code> and the <code>create</code> action.</p>
+
+<p>As demonstrated above you can set the HTTP method with <code>:method => :get|:post|:put|:delete</code></p>
+
+<p>It is very much so possible to 'overload' a url by specifying many routes with different methods.</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.users_index '/users', :controller => :users, :action => :index
+  r.users_create '/users', :controller => :users, :action => :create, :method => :post
+end
+<% end -%>
+
+<p>In this example if '/users' is GET request, then it will be sent to <code>UsersController#index</code> if it's a POST request it will be sent to <code>UsersController#create</code>.</p>
