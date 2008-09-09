@@ -20,11 +20,35 @@ a:hover {
   float: right;
   border-style: solid;
   margin-left: 10px;
+  padding-left: 20px;
+}
+
+ul {
+  padding-left: 10px;
 }
 
 #toc ol {
-  padding-left: 30px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+.top_list {
+  list-style-type: decimal;
+  font-weight: bold;
+/*  font-size: 14px;*/
+}
+
+.sub_list_1 {
+  font-weight: normal;
+  list-style-type: upper-roman;
+}
+
+.sub_list_2 {
+  list-style-type: lower-alpha;
+}
+
+.sub_list_3 {
+  list-style-type: lower-roman;
 }
 
 #main {
