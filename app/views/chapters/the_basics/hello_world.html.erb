@@ -58,3 +58,9 @@ test/
 vendor/
   plugins/
 <% end -%>
+
+<p>This has generated everything you need to get started. If we start the server we should see a 'Welcome' page on <%= simple_link('http://localhost:3000') %></p>
+
+<% code(:cl) do -%>
+$ mackery server
+<% end -%>

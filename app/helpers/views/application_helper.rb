@@ -21,6 +21,10 @@ module Mack
         @page_title ||= 'The Macker\'s Guide to the Universe'
       end
       
+      def simple_link(link)
+        link_to(link, link, :target => :_blank)
+      end
+      
     end
   end
 end
