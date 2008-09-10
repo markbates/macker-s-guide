@@ -1,0 +1,24 @@
+<% page_title('Gems Dependencies') -%>
+
+To add gems dependencies to your mack application, you would need to modify the gems.rb file
+located in config/initializers folder.
+
+<p>Here's the content of the default gem.rb with comments about how to add gem dependencies to your application:</p>
+
+<% code do -%>
+# Using this file you can add gems dependencies to your application.
+# gem_name, options
+# gem_name is the name of the gem you want to add.
+# :version, optional, is the version of the gem you want to use.
+# :libs, optional, is an array of files you want to require.
+# :source, options, is the source you want to use to install a particular gem.
+require_gems do |gem|
+  # gem.add "mack-data_mapper", :libs => "mack-data_mapper"
+  # examples:
+  # gem.add :redgreen, :version => "1.2.2", :libs => :redgreen
+  # gem.add :termios
+  # gem.add :rubyzip, :source => "http://gems.rubyforge.org"
+end
+<% end -%> 
+
+

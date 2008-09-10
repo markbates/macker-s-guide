@@ -1,0 +1,11 @@
+<% page_title('MIME Types') -%>
+
+<p>Mack will support all standard MIME types out of the box.</p>
+
+<p>If necessary, you can register new MIME types for your application by modifying the mime_types.rb file.</p>
+
+<p>Here's an example on how to register a new MIME type:</p>
+
+<% code do %>
+  Mack::Utils::MimeTypes.register(:my_new_type, "app/my_new_type")
+<% end -%>
