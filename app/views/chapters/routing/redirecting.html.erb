@@ -1,0 +1,12 @@
+<% page_title('Redirecting') -%>
+
+<p>Routing in Mack allows you to specify routes that you like to redirect to another route. This is extremely useful when you change some urls and you wish to map the old urls for a while. Or maybe you want to give a 'tracking' url to a customer.</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.connect '/old_users/show/:id', :redirect_to => '/users/:id'
+  r.connect '/old_blog', :redirect_to => '/blog', :status => 301
+end
+<% end -%>
+
+<p>Let's say a request comes in that matches '/old_users/show/1' that will be redirected to '/users/1' with a status of 302 (Moved Temporarily). Now if another request that comes in and matches '/old_blog' it will be redirected to '/blog' with a status of 301 (Moved Permanently).</p>
