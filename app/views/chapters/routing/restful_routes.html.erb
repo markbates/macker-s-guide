@@ -23,3 +23,25 @@ end
 <% end -%>
 
 <p>In this example if '/users' is GET request, then it will be sent to <code>UsersController#index</code> if it's a POST request it will be sent to <code>UsersController#create</code>.</p>
+
+<p>If you want to map a full suite of RESTful routes, you can do this with just one line:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.resource :users
+end
+<% end -%>
+
+<p>This is the equivalent of mapping the following routes:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.users_index '/users', :controller => :users, :action => :index
+  r.users_new '/users/new', :controller => :users, :action => :new
+  r.users_show '/users/:id', :controller => :users, :action => :show
+  r.users_edit '/users/:id/edit', :controller => :users, :action => :edit
+  r.users_create '/users', :controller => :users, :action => :create, :method => :post
+  r.users_update '/users/:id', :controller => :users, :action => :update, :method => :put
+  r.users_delete '/users/:id', :controller => :users, :action => :delete, :method => :delete
+end
+<% end -%>
