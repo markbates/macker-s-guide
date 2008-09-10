@@ -1,0 +1,9 @@
+<% page_title('Routing') -%>
+
+<p>Routing is the nerve center of any web application or framework. Routes serve two purposes in Mack. First, they help tell Mack who should handle a request when it comes in. Second, they help to generate the correct urls to use for display purposes.</p>
+
+<p>When a request comes into Mack, Mack takes that url, and its HTTP verb (GET, POST, PUT, DELETE), and looks it up in the routing engine. If the routing engine finds a matching url it will tell Mack which controller and action are going to be handling the request. It will also pick apart any parameters that are part of that url and make them available in the params Hash. Mack will then call on that controller and action to do the work necessary for that request.</p>
+
+<p>If a matching route is not found Mack will attempt to try and find a 'static' file match in the public directory. If that's not there, Mack, will raise a <code>Mack::Errors::ResourceNotFound</code> exception.</p>
+
+<p class="note">NOTE: A url will only match a route if both the url pattern AND the HTTP verb match. For example, if you have '/foo' defined in your routes as a GET, then if that url comes in as a POST, it will not be matched.</p>

@@ -8,15 +8,26 @@
   <script src="/javascripts/sh_core.js" type="text/javascript"></script>
   <script src="/javascripts/sh_brush_ruby.js" type="text/javascript"></script>
   <script src="/javascripts/sh_brush_fs.js" type="text/javascript"></script>
-
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+  var pageTracker = _gat._getTracker("UA-4007638-5");
+  pageTracker._trackPageview();
+  </script>
 </head>
 <body>
+<% if Mack.env == 'production' -%>
+<div id="header">
+  <div id="logo">
+    <a href="http://www.mackframework.com" title="Mack Framework">Mack Framework</a>
+    <h1>A Distributed Ruby Web Application Framework</h1>
+  </div>
+</div>
+<% end -%>
 
 <div id="wrapper">
-
-  <% if tell[:notice] -%>
-    <div id="tell_notice"><%= tell[:notice] %></div>
-  <% end -%>
 
   <div id="toc"><%= render(:partial, 'chapters/toc') %></div>
   <div id="main">
@@ -30,6 +41,12 @@
 dp.SyntaxHighlighter.ClipboardSwf = '/javascripts/clipboard.swf';  
 dp.SyntaxHighlighter.HighlightAll('code');  
 </script>
+
+<% if Mack.env == 'production' -%>
+<div id="footer">
+  <p>&copy; Mack Framework</p>
+</div>
+<% end -%>
 
 </body>
 </html>

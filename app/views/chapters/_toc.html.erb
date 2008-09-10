@@ -1,4 +1,5 @@
-<ol>
+<ol class='top_list'>
+  <li><%= link_to('Welcome', home_page_url) %></li>
   <li>
     Getting Started
     <%= render(:partial, 'chapters/getting_started/toc') %>
@@ -12,7 +13,7 @@
     <%= render(:partial, 'chapters/configuration/toc') %>
   </li>
   <li>
-    Routing
+    <%= chapter('Routing', 'routing/index') %>
     <%= render(:partial, 'chapters/routing/toc') %>
   </li>
   <li>
@@ -44,5 +45,14 @@
     <%= render(:partial, 'chapters/mack_more/toc') %>
   </li>
   <li>Rails to Mack Cheat Sheet</li>
-  <li>Contributing</li>
+  <li><%= chapter('Contributing', 'contributing/index') %></li>
+  <li>
+    APIs
+    <ul>
+      <li><%= link_to('mack', 'http://api.mackframework.com/mack/', :target => :_blank) %></li>
+      <% mack_more.each do |g| -%>
+        <li><%= link_to("mack-#{g}", "http://api.mackframework.com/mack-#{g}/", :target => :_blank) %></li>
+      <% end -%>
+    </ul>
+  </li>
 </ol>

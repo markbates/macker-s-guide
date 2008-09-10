@@ -1,0 +1,45 @@
+<% page_title('Default Routes') -%>
+
+<p>To get started with Routing, Mack gives you the option of defining 'default' routes, as shown below:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.defaults
+end
+<% end -%>
+
+<p>By adding <code>r.defaults</code> to <code>Mack::Routes</code> you are actually defining 8 different routes. They are as follows:</p>
+
+<ul>
+  <li>/:controller/:action [GET]</li>
+  <li>/:controller/:action [POST]</li>
+  <li>/:controller/:action [PUT]</li>
+  <li>/:controller/:action [DELETE]</li>
+  <li>/:controller/:action/:id [GET]</li>
+  <li>/:controller/:action/:id [POST]</li>
+  <li>/:controller/:action/:id [PUT]</li>
+  <li>/:controller/:action/:id [DELETE]</li>
+</ul>
+
+<p>Here are a few examples:</p>
+
+<% code do -%>
+'/users/list' 
+  # => routes to UsersController#list
+'/users/show/1' 
+  # => routes to UsersController#show, params[:id] == 1
+<% end -%>
+
+<p>Other 'basic' routes can be defined as follows:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.connect '/', :controller => :default, :action => :home_page
+  r.connect '/hello/world', :controller => :default, :action => :home_page
+  r.defaults
+end
+<% end -%>
+
+<p>Now when a route comes in to either '/' or '/hello/world' it will be directed to the <code>DefaultController</code> and the <code>home_page</code> action.</p>
+
+<p class="note">NOTE: It's important to note that the 'default' routes will always be the last routes matched, regardless of where they are placed in the routes.rb file.</p>

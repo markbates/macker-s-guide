@@ -2,13 +2,14 @@ body {
   /*background-color: #e6e6e6; color: #333;*/
   text-align: center;
   min-width: 1px;
-  padding: 10px;
+  padding: 0px;
+  margin: 0px;
   font-family: Verdana;
   font-size: 12px;
 }
 
 a {
-  color: blue;
+  color: #a90000;
 }
 
 a:hover {
@@ -19,11 +20,35 @@ a:hover {
   float: right;
   border-style: solid;
   margin-left: 10px;
+  padding-left: 20px;
+}
+
+ul {
+  padding-left: 10px;
 }
 
 #toc ol {
-  padding-left: 30px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+.top_list {
+  list-style-type: decimal;
+  font-weight: bold;
+/*  font-size: 14px;*/
+}
+
+.sub_list_1 {
+  font-weight: normal;
+  list-style-type: upper-roman;
+}
+
+.sub_list_2 {
+  list-style-type: lower-alpha;
+}
+
+.sub_list_3 {
+  list-style-type: lower-roman;
 }
 
 #main {
@@ -33,8 +58,57 @@ a:hover {
 #wrapper {
   margin: 0 auto; 
   text-align: left;
-  width: 70%;
+  width: 80%;
   padding: 4px;
+}
+
+#header { 
+  background: #000; 
+  border-bottom: 0.8em solid #a90000; 
+  color: #fff; 
+}
+
+#logo {
+  padding: 0px; 
+  
+  width: 72.8em; 
+  margin: 0 auto; 
+}
+
+#logo a { 
+  font: normal 5.0em "American Typewriter", "Trebuchet MS", Verdana, sans-serif; 
+  color: #fff;
+  text-decoration: none; 
+}
+
+#logo h1, #logo #tagline { 
+  display: none; 
+  font: normal 1.6em "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+
+#footer { 
+  padding: 0.8em 0; 
+  background: #000; 
+  border-top: 0.5em solid #a90000; 
+  color: #fff; 
+  clear: both;
+}
+
+#footer p { 
+  font-weight: bold; 
+  font-size: 1.0em; 
+  text-transform: uppercase; 
+  text-align: center; 
+}
+
+#footer a, #footer a:visited { 
+  color: #fff; 
+  border-bottom: 1px solid #a90000; 
+}
+
+#footer a:hover { 
+  color: #fff; 
+  border-bottom: 1px solid #fff; 
 }
 
 p {
@@ -43,5 +117,10 @@ p {
 
 .option {
   color: #aeaeae;
+  font-style: italic;
+}
+
+.note {
+  color: grey;
   font-style: italic;
 }
