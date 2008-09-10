@@ -13,7 +13,7 @@ module Mack
       end
       
       def chapter(title, view)
-        link_to(title, chapters_show_url(:view => view.gsub('/', '-')))
+        link_unless_current(title, chapters_show_url(:view => view.gsub('/', '-')))
       end
       
       def page_title(title = nil)
@@ -35,6 +35,13 @@ module Mack
         else
           "mack-#{name}"
         end
+      end
+      
+      def link_unless_current(text, link = text, option = {})
+        unless link == request.fullpath
+          return link_to(text, link, options)
+        end
+        return text
       end
       
     end
