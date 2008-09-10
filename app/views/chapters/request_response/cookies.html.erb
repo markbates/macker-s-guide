@@ -1,0 +1,22 @@
+<% page_title('Cookies') -%>
+
+<p>Cookies can be easily set and retrieved in controllers and views.</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def login
+    cookies[:user_id] = 1
+    cookies[:remember_me] = {:value => 1, :expires => 1.month.from_now}
+  end
+end
+<% end -%>
+
+<p>In this example we set the user_id cookie with the value 1. Because there was no expiration set for the cookie will expire when the user closes their browser. The remember cookie will expire one month from when it was set.</p>
+
+<p>Retrieving a cookie is as easy as retrieving a value from a Hash:</p>
+
+<% code do -%>
+cookies[:user_id] # => 1
+<% end -%>
