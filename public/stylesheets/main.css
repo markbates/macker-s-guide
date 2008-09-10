@@ -124,3 +124,9 @@ p {
   color: grey;
   font-style: italic;
 }
+
+.current {
+  background-color: #a90000;
+  color: white;
+  font-weight: bold;
+}

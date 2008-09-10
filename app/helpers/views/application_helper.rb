@@ -41,7 +41,7 @@ module Mack
         unless link == request.fullpath
           return link_to(text, link, options)
         end
-        return text
+        return "<span class='current'>#{text}</span>"
       end
       
     end

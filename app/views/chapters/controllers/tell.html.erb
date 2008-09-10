@@ -1,0 +1,21 @@
+<% page_title('Tell Messaging') -%>
+
+<p>Tell messaging is a way to send a message from a controller down to a view. The 'message' persists across a redirect as well. When a non-redirected page is rendered, ie. any page that does not have a status of 3xx, the tell messages will be cleared.</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def say_hi
+    tell[:notice] = 'Hello World'
+  end
+  
+end
+<% end -%>
+
+<% code do -%>
+# app/views/users/say_hi.html.erb
+
+Here's a message from the controller: &lt;%= tell[:notice] %>
+
+<% end -%>
