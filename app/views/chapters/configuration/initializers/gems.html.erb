@@ -1,23 +1,36 @@
 <% page_title('Gems Dependencies') -%>
 
-To add gems dependencies to your mack application, you would need to modify the gems.rb file
-located in config/initializers folder.
+<p>Gems dependencies in Mack application are managed through gems.rb file located in {APP_DIR}/config/initializers folder of your application.</p>
 
-<p>Here's the content of the default gem.rb with comments about how to add gem dependencies to your application:</p>
+<p>To add gem dependencies, you will need to call <code>gem.add</code> method inside the require_gems block.  The add method takes 2 sets of arguments, the first one is required, which is the name of the gem, and the second set is a list of options.</p>
+
+Here's the list of supported options:
+<ul>
+  <li>
+    <b>:version</b><br>
+    Specify a specific version of the gem that will be used.  If none is specified, then the latest gem installed will be used.
+  </li>
+  <li>
+    <b>:libs</b><br>
+    Specify the files that will be required by the gem. If none is specified, then nothing will be automatically required.
+  </li>
+  <li>
+    <b>:task</b><br>
+    Specify the task file that will be required by the gem.  In the task file, you should load all the rake files available in your application; this way all the tasks associated with your application will be made available when <code>rake --tasks</code> command is invoked.<br>Please note that by default the gem manager will try to find a file named {main_gem_file}_task.rb, where the main_gem_file is whatever the main file specified in the :libs directive.  This is a convenient way of letting developer not to have to specify the :task directive if that pattern is followed.
+  </li>
+  <li>
+    <b>:source</b><br>
+    This tells the gem manager to install the gem from a specified source.<br>For example: <code>gem.add :termios, :source => "http://gems.rubyforge.org"</code> will tell the gem manager that you'd like to install the gem from that source. 
+  </li>
+</ul>
+
+<p>The following is an example on how to specify gem dependencies for your application:</p>
+Let's say we want to add <code>mack-data_mapper</code> and <code>mack-data_factory</code> as dependencies, then here's what the gems.rb file will look like:
 
 <% code do -%>
-# Using this file you can add gems dependencies to your application.
-# gem_name, options
-# gem_name is the name of the gem you want to add.
-# :version, optional, is the version of the gem you want to use.
-# :libs, optional, is an array of files you want to require.
-# :source, options, is the source you want to use to install a particular gem.
 require_gems do |gem|
-  # gem.add "mack-data_mapper", :libs => "mack-data_mapper"
-  # examples:
-  # gem.add :redgreen, :version => "1.2.2", :libs => :redgreen
-  # gem.add :termios
-  # gem.add :rubyzip, :source => "http://gems.rubyforge.org"
+  gem.add "mack-data_mapper", :version => "0.7.0", :libs => "mack-data_mapper"
+  gem.add "mack-data_factory", :version => "0.7.0", :libs => "mack-data_factory"
 end
 <% end -%> 
 

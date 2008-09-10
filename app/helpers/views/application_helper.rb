@@ -29,6 +29,14 @@ module Mack
         [:active_record, :caching, :data_factory, :data_mapper, :distributed, :encryption, :facets, :haml, :javascript, :localization, :markaby, :notifier, :orm, :pdf_writer]
       end
       
+      def mack_more_toc(name)
+        if File.exists?(Mack::Paths.views("chapters/mack_more/#{name}/index.html.erb"))
+          chapter("mack-#{name}", "mack_more/#{name}/index") 
+        else
+          "mack-#{name}"
+        end
+      end
+      
     end
   end
 end
