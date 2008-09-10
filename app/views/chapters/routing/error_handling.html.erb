@@ -1,0 +1,31 @@
+<% page_title('Error Handling') -%>
+
+<p>When defining routes in Mack you can define a controller and an action to handle an exception, should one arise. Let's look at a couple of examples:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.handle_error HolyCrapError, :controller => :whoops, :action => :oops
+  r.handle_error NoMethodError, :controller => :whoops, :action => :something_bad_happened
+end
+<% end -%>
+
+<p>Now, if a HolyCrapError or a NoMethodError is raised the request will be forwarded on to the controller and action specified in the routes.</p>
+
+<% code do -%>
+class WhoopsController
+  include Mack::Controller
+  
+  def oops
+    render(:text, "We're sorry, we caught the following exception: '#{request.caught_exception}' when someone tried to access: '#{request.fullpath}'", :status => 500)
+  end
+  
+  def something_bad_happened
+    render(:action, :not_found, :status => 404)
+  end
+  
+end
+<% end -%>
+
+<p>As you can see this is a full controller, will all the bells and whistles of any other controller. Here we've caught the exceptions and sent them to the <code>WhoopsController</code> to handle them. In the specified actions we've set the status of the response and sent nice messages back to the end user.</p>
+
+<p>The controller that's handling the exception has full access to all the original parameters of the 'original' request.</p>
