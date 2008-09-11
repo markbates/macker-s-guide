@@ -1,3 +1,40 @@
 <% page_title 'Defining relational data in a Factory'%>
 
+To describe a relational data in a factory, you would use the <code>association</code> method instead of the <code>field</code> method.<br>
+The following is an example to illustrate this:
+
+<% code do -%>
+class UserFactory
+  include Mack::Data::Factory
+  
+  field :username, :default => "ds" do |def_value, rules, index|
+    ret_val = def_value if index == 0
+    ret_val = "#{def_value}#{index}" if index > 0
+    ret_val
+  end
+  field :password, :default => "password", :immutable => true
+end
+
+class ItemFactory
+  include Mack::Data::Factory
+  
+  field :title, :content => :alpha_numeric, :length => 12, :add_space => false
+  field :description, :content => :alpha, :length => 20, :add_space => true
+  field :path, :default => File.join(Mack.root, "public", "images", "library", "ds_photos", "foo.jpg")
+  association :owner_id, {:user => 'id'}
+  field :uploaded_at, :content => :time, :start_time => 20.days.ago, :end_time => Time.now
+  field :updated_at, :content => :time
+end
+<% end -%>
+
+<p>In the above example, the ItemFactory define the owner_id field as an association to {:user => 'id'}.  When the factory is run, it will generate value for owner_id as 'the id of the user #x'.  You can also pass in rules to define which instance of user that the id will be retrieved from.  The rules are: :first, :last, :random, and :spread.  The default is :spread. </p> 
+
+<p>Definition of the association rules:</p>
+  <code>:first</code>  --> always associate with the first object that this object belongs to.  If there are 10 users [id = 0 - 10], then the item will always get associated with user #0 (i.e. item's owner_id always == 0)<br>
+  <code>:last</code>   --> always associate with the last object that this object belongs to.  If there are 10 users [id = 0 - 10], then the item will always get associated with user #10 (i.e. item's owner_id always == 9)<br>
+  <code>:random</code> --> always associate with the Nth object that this object belongs to (and N is random). If there are 10 users [id = 0 - 10], then the item will get associated with user #n (i.e. item's owner_id == rand(10))<br>
+  <code>:spread</code> --> spread the association.  If there are 3 users [id = 0 - 2], then the items' association will be spread out (i.e. 6 items will have id--sequentially--[0, 1, 2, 0, 1, 2])
+
+
+
 <p class='note'>Go back to <%= chapter('Data Factory Home', 'mack_more/data_factory/index')%></p>
