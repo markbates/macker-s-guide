@@ -1,46 +1,46 @@
 <ol class='sub_list_1' id='controllers_toc'>
-  <li><%= chapter('Actions', 'controllers-actions') %></li>
-  <li>Headers/Status</li>
-  <li>Filters</li>
-  <li>Helpers</li>
-  <li>Layouts</li>
-  <li><%= chapter('Tell Messaging', 'controllers-tell') %></li>
+  <li><%= chapter('Actions', 'controllers/actions') %></li>
+  <li><%= chapter('Headers/Status', 'controllers/headers_status') %></li>
+  <li><%= chapter('Filters', 'controllers/filters') %></li>
+  <li><%= chapter('Helpers', 'controllers/helpers') %></li>
+  <li><%= chapter('Layouts', 'controllers/layouts') %></li>
+  <li><%= chapter('Tell Messaging', 'controllers/tell') %></li>
   <li>
-    Rendering
+    <%= chapter('Rendering', 'controllers/rendering/index') %>
     <ol class='sub_list_2'>
       <li>
-        Engines
+        <%= chapter('Engines', 'controllers/rendering/engines/index') %>
         <ol class='sub_list_3'>
-          <li>Erubis</li>
-          <li>Builder</li>
+          <li><%= chapter('Erubis', 'controllers/rendering/engines/erubis') %></li>
+          <li><%= chapter('XML Builder', 'controllers/rendering/engines/xml_builder') %></li>
           <li>
-            Extending
+            <%= chapter('Extending', 'controllers/rendering/engines/extending/index') %>
             <ol class='sub_list_4'>
-              <li>Case Study: PDF Writer</li>
+              <li><%= chapter('Case Study: PDF Writer', 'controllers/rendering/engines/extending/pdf_writer') %></li>
             </ol>
           </li>
         </ol>
       </li>
       <li>
-        Types
+        <%= chapter('Types', 'controllers/rendering/types/index') %>
         <ol class='sub_list_3'>
-          <li>:action</li>
-          <li>:text</li>
-          <li>:inline</li>
-          <li>:xml</li>
-          <li>:url</li>
-          <li>:partial</li>
-          <li>:template</li>
-          <li>:public</li>
+          <li><%= chapter(':action', 'controllers/rendering/types/action') %></li>
+          <li><%= chapter(':text', 'controllers/rendering/types/text') %></li>
+          <li><%= chapter(':inline', 'controllers/rendering/types/inline') %></li>
+          <li><%= chapter(':xml', 'controllers/rendering/types/xml') %></li>
+          <li><%= chapter(':url', 'controllers/rendering/types/url') %></li>
+          <li><%= chapter(':partial', 'controllers/rendering/types/partial') %></li>
+          <li><%= chapter(':template', 'controllers/rendering/types/template') %></li>
+          <li><%= chapter(':public', 'controllers/rendering/types/public') %></li>
           <li>
-            Extending
+            <%= chapter('Extending', 'controllers/rendering/types/extending/index') %>
             <ol class='sub_list_4'>
-              <li>Case Study: PDF Writer</li>
+              <li><%= chapter('Case Study: PDF Writer', 'controllers/rendering/types/extending/pdf_writer') %></li>
             </ol>
           </li>
         </ol>
       </li>
     </ol>
   </li>
-  <li>Redirecting</li>
+  <li><%= chapter('Redirecting', 'controllers/redirecting') %></li>
 </ol>

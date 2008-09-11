@@ -1,41 +1,41 @@
 <ol class='top_list'>
   <li><%= link_to('Welcome', home_page_url) %></li>
   <li>
-    Getting Started <%= toc(:getting_started) %>
+    <%= chapter('Getting Started', 'getting_started/index') %> <%= toc(:getting_started) %>
   </li>
   <li>
     <%= chapter('The Basics', 'the_basics/index') %> <%= toc(:the_basics) %>
   </li>
   <li>
-    Configuration <%= toc(:configuration) %>
+    <%= chapter('Configuration', 'configuration/index') %> <%= toc(:configuration) %>
   </li>
   <li>
     <%= chapter('Routing', 'routing/index') %> <%= toc(:routing) %>
   </li>
   <li>
-    Controllers <%= toc(:controllers) %>
+    <%= chapter('Controllers', 'controllers/index') %> <%= toc(:controllers) %>
   </li>
   <li>
-    Views <%= toc(:views) %>
+    <%= chapter('Views', 'views/index') %> <%= toc(:views) %>
   </li>
   <li>
-    Session <%= toc(:session) %>
+    <%= chapter('Session', 'session/index') %> <%= toc(:session) %>
   </li>
   <li>
-    Request/Response <%= toc(:request_response) %>
+    <%= chapter('Request/Response', 'request_response/index') %> <%= toc(:request_response) %>
   </li>
   <li>
-    Testing <%= toc(:testing) %>
+    <%= chapter('Testing', 'testing/index') %> <%= toc(:testing) %>
   </li>
   <li>
-    Plugins <%= toc(:plugins) %>
+    <%= chapter('Plugins', 'plugins/index') %> <%= toc(:plugins) %>
   </li>
   <li>
-    Mack More <%= toc(:mack_more) %>
+    <%= chapter('Mack More', 'mack_more/index') %> <%= toc(:mack_more) %>
   </li>
-  <li>Rails to Mack Cheat Sheet</li>
+  <li><%= chapter('Rails to Mack Cheat Sheet', 'rails_to_mack/index') %></li>
   <li><%= chapter('Contributing', 'contributing/index') %></li>
   <li>
-    APIs <%= toc(:apis) %>
+    <%= chapter('APIs', 'apis/index') %> <%= toc(:apis) %>
   </li>
 </ol>
