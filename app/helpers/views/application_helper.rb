@@ -6,6 +6,16 @@ module Mack
     module ApplicationHelper
       # Anything in this module will be included into all views
       
+      def toc(id)
+        sid = "#{id}_toc"
+        val = '['
+        val << link_to_function('+/-', js.toggle(sid))
+        val << ']'
+        val << render(:partial, "chapters/#{id}/toc")
+        val << update_page {|p| p.hide(sid)}
+        val
+      end
+      
       def code(type = :ruby, &block)
         concat("<pre name=\"code\" class=\"#{type}\">", block.binding)
         yield

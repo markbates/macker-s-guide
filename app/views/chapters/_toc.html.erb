@@ -1,58 +1,41 @@
 <ol class='top_list'>
   <li><%= link_to('Welcome', home_page_url) %></li>
   <li>
-    Getting Started
-    <%= render(:partial, 'chapters/getting_started/toc') %>
+    Getting Started <%= toc(:getting_started) %>
   </li>
   <li>
-    <%= chapter('The Basics', 'the_basics/index') %>
-    <%= render(:partial, 'chapters/the_basics/toc') %>
+    <%= chapter('The Basics', 'the_basics/index') %> <%= toc(:the_basics) %>
   </li>
   <li>
-    Configuration
-    <%= render(:partial, 'chapters/configuration/toc') %>
+    Configuration <%= toc(:configuration) %>
   </li>
   <li>
-    <%= chapter('Routing', 'routing/index') %>
-    <%= render(:partial, 'chapters/routing/toc') %>
+    <%= chapter('Routing', 'routing/index') %> <%= toc(:routing) %>
   </li>
   <li>
-    Controllers
-    <%= render(:partial, 'chapters/controllers/toc') %>
+    Controllers <%= toc(:controllers) %>
   </li>
   <li>
-    Views
-    <%= render(:partial, 'chapters/views/toc') %>
+    Views <%= toc(:views) %>
   </li>
   <li>
-    Session
-    <%= render(:partial, 'chapters/session/toc') %>
+    Session <%= toc(:session) %>
   </li>
   <li>
-    Request/Response
-    <%= render(:partial, 'chapters/request_response/toc') %>
+    Request/Response <%= toc(:request_response) %>
   </li>
   <li>
-    Testing
-    <%= render(:partial, 'chapters/testing/toc') %>
+    Testing <%= toc(:testing) %>
   </li>
   <li>
-    Plugins
-    <%= render(:partial, 'chapters/plugins/toc') %>
+    Plugins <%= toc(:plugins) %>
   </li>
   <li>
-    Mack More
-    <%= render(:partial, 'chapters/mack_more/toc') %>
+    Mack More <%= toc(:mack_more) %>
   </li>
   <li>Rails to Mack Cheat Sheet</li>
   <li><%= chapter('Contributing', 'contributing/index') %></li>
   <li>
-    APIs
-    <ul>
-      <li><%= link_to('mack', 'http://api.mackframework.com/mack/', :target => :_blank) %></li>
-      <% mack_more.each do |g| -%>
-        <li><%= link_to("mack-#{g}", "http://api.mackframework.com/mack-#{g}/", :target => :_blank) %></li>
-      <% end -%>
-    </ul>
+    APIs <%= toc(:apis) %>
   </li>
 </ol>

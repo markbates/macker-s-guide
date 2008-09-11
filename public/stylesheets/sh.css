@@ -191,5 +191,5 @@ pre {
 .dp-highlighter .comment, .dp-highlighter .comments { color: #aeaeae;
 font-style: italic; }
 .dp-highlighter .string { color: #65B042; background-color: inherit; }
-.dp-highlighter .keyword { color: #E28964; font-weight: bold; }
+.dp-highlighter .keyword { color: #0080FF; font-weight: bold; }
 .dp-highlighter .preprocessor { color: gray; background-color: inherit; }
