@@ -21,6 +21,7 @@ a:hover {
   border-style: solid;
   margin-left: 10px;
   padding-left: 20px;
+  min-width: 250px;
 }
 
 ul {
@@ -53,6 +54,7 @@ ul {
 
 #main {
 /*  float: left;*/
+/*  clear: right;*/
 }
 
 #wrapper {
