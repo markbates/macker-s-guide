@@ -25,7 +25,7 @@ dp.sh.Brushes.Ruby = function()
 
 	this.CssClass = 'dp-rb';
 	this.Style =	'.dp-rb .symbol { color: red; }' +
-					'.dp-rb .variable { color: #3E87E3; font-weight: bold; }';
+					'.dp-rb .variable { color: yellow; font-weight: bold; }';
 }
 
 dp.sh.Brushes.Ruby.prototype = new dp.sh.Highlighter();

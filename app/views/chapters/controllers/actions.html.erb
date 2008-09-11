@@ -1,0 +1,53 @@
+<% page_title('Actions') -%>
+
+<p>Actions are ultimately what respond to the request from the client. They are defined as methods on your controller class.</p>
+
+<h2>Simple</h2>
+
+<% code do -%>
+# app/controllers/users_controller.rb
+class UsersController
+  include Mack::Controller
+  
+  def show
+    @user = User.first(params[:id])
+  end
+  
+end
+
+# config/routes.rb
+Mack::Routes.build do |r|
+  r.resources :users
+end
+
+# app/views/users/show.html.erb
+<h1>Hello '&lt;%= @user.display_name %>'</h1>
+<% end -%>
+
+<p>When a request comes in with the url '/users/1' it gets routed to the <code>UsersController</code> and the <code>show</code> action. A <code>User</code> is looked up from the database, let's say, based on the id parameter from the url. Once the user is found an instance variable, <code>@user</code> is set, and the action returns. Mack then renders the app/views/users/show.html.erb template, which has access to the instance variables set by the action in the controller.</p>
+
+<h2>No Action Defined</h2>
+
+<p>An action method doesn't necessarily have to be defined for a request to still be handled by the view template for our action:</p>
+
+<% code do -%>
+# app/controllers/users_controller.rb
+class UsersController
+end
+
+# config/routes.rb
+Mack::Routes.build do |r|
+  r.say_hi '/users/say_hi', :controller => :users, :actions => :say_hi
+end
+
+# app/views/users/say_hi.html.erb
+<h1>Hello World!</h1>
+<% end -%>
+
+<p>When the request comes in for '/users/say_hi' Mack will see that there is no <code>say_hi</code> action in the <code>UsersController</code> so it will attempt to find the say_hi.html.erb template on disk. Finding that it will render and return that template.</p>
+
+<h2>No Action and No Template</h2>
+
+<p>If a request comes in and there is no action and template defined Mack will attempt to find a static page in the public directory that matches the uri path, if one is found, then that static page is returned, otherwise a <code>Mack::Errors::ResourceNotFound</code> error is raised. </p>
+
+<p class='note'>NOTE: For an action to be able to respond to a request it has to be <code>public</code>. If the action is any other state, say <code>protected</code> or <code>private</code>, it will not be able to respond to the request.</p>
