@@ -1,0 +1,185 @@
+<% page_title 'Examples' %>
+
+<p class='note'>TODO: write about the factory rake task</p>
+Now that we have learned all the factory features, let's look at a concrete example to give you an idea on how it can be used in an application.
+
+<p><i>The setup</i></p>
+Let's say that we are building a very simple photo gallery website, where there are only 2 models: a user who have n number of photos, and a photo that belongs a user.
+
+<p>The following is how the migration file for users, items model may look like:</p>
+<% code do -%>
+class CreateGalleryModels < ActiveRecord::Migration
+  def self.up
+    create_table :users do |t|
+      t.column :username, :string
+      t.column :hashed_password, :string
+      t.column :salt, :string
+    end
+    create_table :items do |t|
+      t.column :title, :string
+      t.column :description, :string
+      t.column :path, :string
+      t.column :owner_id, :integer
+      t.column :uploaded_at, :datetime
+      t.column :updated_at, :datetime
+    end
+  end
+  
+  def self.down
+    drop_table :items
+    drop_table :users
+  end
+end
+<% end -%>
+
+<p>And here's how the model files may look like:</p>
+<% code do -%>
+  
+  class Item < ActiveRecord::Base
+    belongs_to  :user
+    
+    # ...
+  end
+  
+  class User < ActiveRecord::Base
+    has_many  :items, :foreign_key => 'owner_id'
+    
+    # ...
+  end
+<% end -%>
+
+<p>Once we have the migration files setup, the next step would be to create the factory definition that we can use later to generate test data</p>
+
+<% code do %>
+
+class UserFactory
+  include Mack::Data::Factory
+  
+  field :username, :default => "ds" do |def_value, rules, index|
+    ret_val = def_value if index == 0
+    ret_val = "#{def_value}#{index}" if index > 0
+    ret_val
+  end
+  field :password, :default => "password", :immutable => true
+end
+
+class ItemFactory
+  include Mack::Data::Factory
+  
+  field :title, :content => :alpha_numeric, :length => 12, :add_space => false
+  field :description, :content => :alpha, :length => 20, :add_space => true
+  field :path, :default => File.join(Mack.root, "public", "images", "library", "ds_photos", "foo.jpg")
+  association :owner_id, {:user => 'id'}
+  field :uploaded_at, :content => :time, :start_time => 20.days.ago, :end_time => Time.now
+  field :updated_at, :content => :time
+end
+<% end -%>
+
+<p>To run the factory, all you have to do is call the <code>create</code> method from the factory.  Typically in your spec's before(...) method.</p>
+
+<% code do -%>
+describe "Gallery" do
+  before(:all) do
+    UserFactory.create(10)
+    ItemFactory.create(100)
+  end
+  
+  # ...
+end
+<% end -%>
+
+<p>
+This will usually be sufficient for most cases, but you may have different test situation, for example:<br>
+<ul style="margin: 10px">
+  <li>You have many test scenarios, but you don't want to build a new factory for each test scenario.</li>
+  <li>You have data dependencies where data creation sequence is significant (like the above example where the items can only be created after the user has been created)</li>
+  <li>You want to run the factory through a rake task.</li>
+</ul>
+</p>
+
+Well, the data factory will handle all those situations, and here's how.
+
+<p><i>Using 1 factory for multiple scenarios through scoping.</i></p>
+In a factory, you can create scoping for how a field should be created.  For example: in normal case, we would expect all the items generated using the definition stated in the above example (see: ItemFactory).  However, maybe we have a feature in our application to pick older photographs, so in that case we would want some of the photos to be few months old (i.e. <code>uploaded_at</code> is few months ago).  To do that we will define scoping for 'old_photos' in the ItemFactory.  So the updated class would look like:
+
+<% code do -%>
+  class ItemFactory
+    include Mack::Data::Factory
+
+    field :title, :content => :alpha_numeric, :length => 12, :add_space => false
+    field :description, :content => :alpha, :length => 20, :add_space => true
+    field :path, :default => File.join(Mack.root, "public", "images", "library", "ds_photos", "foo.jpg")
+    association :owner_id, {:user => 'id'}
+    field :uploaded_at, :content => :time, :start_time => 20.days.ago, :end_time => Time.now
+    field :updated_at, :content => :time
+    
+    scope_for(:old_photos) do
+      field :uploaded_at, :content => :time, :start_time => 10.months.ago, :end_time => 5.months.ago
+    end
+  end
+<% end -%>
+
+As you can see above, if the factory is run in <code>old_photos</code> scope, then all the generated records will have <code>uploaded_at</code> field float between 10 months ago and 5 months ago.  Note about <code>scope_for</code> method: it will only overwrite the field define for that scope, for everything else, it will use whatever is defined in the 'default' scope.
+
+<p>
+  With the updated code, we can simulate the situation where the user have 150 old photos and 40 new photos by doing the following:
+<% code do -%>  
+  describe "Gallery" do
+    before(:all) do
+      UserFactory.create(10)
+      
+      # create 150 old photos. Notice that the second argument to the create method is the 
+      # :old_photos scope that we've just added
+      ItemFactory.create(150, :old_photos)
+      
+      # for the new photos, we don't need to pass value for the 2nd argument, because
+      # the generator will always default to :default scope.
+      ItemFactory.create(40)
+    end
+
+    # ...
+  end
+<% end -%>
+</p>
+
+<p><i>Creating Factory chains</i></p>
+As we've seen from previous examples, the factory can be run from before(...) method of a spec (or even anywhere for that matter).  However, if you have complex data dependencies, it would be a good idea to spend time defining the order in which the data should be generated, and then when needed, other developer could just use what you have defined in their own test.  You can achieve that goal by creating factory chains.  A factory chain is a tagged collection of factory execution order that's can be run later by using the tag-value.  A factory chain can be created by calling <code>factory_chain</code> method, and run by calling <code>run_factories</code> method.
+
+<p>Example:</p>
+<% code do -%>
+# in your spec_helper.rb file...
+factories(:basic_gallery) do
+    UserFactory.create(10)
+    ItemFactory.create(100)
+end
+factories(:old_and_new) do
+    UserFactory.create(10)
+    ItemFactory.create(150, :old_photos)
+    ItemFactory.create(40)
+end
+
+# once the factory chains have been defined, you can replace the previous code in before(...) method to do the following:
+
+# for test that uses all 'new' photos, do this:
+describe "Gallery" do
+  before(:all) do
+    run_factories(:basic_gallery)
+  end
+
+  # ...
+end
+
+# for test that uses the 'old and new' photos, do this:
+describe "Gallery" do
+  before(:all) do
+    run_factories(:old_and_new)
+  end
+
+  # ...
+end
+
+
+<% end -%>
+<!-- <p><i>Integrating with the factory rake task</i></p> -->
+
+<p class='note'>Go back to <%= chapter('Data Factory Home', 'mack_more/data_factory/index')%></p>

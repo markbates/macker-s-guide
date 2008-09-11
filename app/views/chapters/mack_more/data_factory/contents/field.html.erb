@@ -1,0 +1,129 @@
+<% page_title("An in-depth look at Field")%>
+
+When creating a factory class, you must explicitly specify any fields of the model that the factory will produce.
+
+<p>The data factory module supports both types of field: regular field, and data association field.</p>
+
+The data association field should be used when you have a relational data (e.g. item belongs to user, so it has a field called owner_id that's associated with a specific user_id).  You will need to use the <code>association</code> method to define the data association field; and we will have a in-depth discussion in the coming chapter.
+
+<p>To add a new field, you will need to call <code>field</code> method. The method takes a few arguments: the name of the field, the content type of the field, and rules on how to generate the content for that field.</p>
+ 
+<p>
+In case that the default content type supported by the data factory doesn't fit your need, you can always define custom content generator for any field in the factory. <br>
+For example: let's say that we have a CarFactory, and we want to generate a 'real' name for the car; since there's no such content type for car name, we will provide a custom generator:
+<% code do -%>
+
+class CarFactory
+  include Mack::Data::Factory
+  
+  field :name, :default => 'Honda' do |def_value, rules, index|
+    models = ['Accord', 'Civic', 'Pilot', 'Element']
+    "#{def_value} #{models.randomize[0]}"
+  end
+end
+
+<% end -%>
+</p>
+<p>The following is the list of supported content types:</p>
+<p><i>Strings and Numbers</i></p>
+<ul style="margin: 15px;">
+  <li>
+    <code>:alpha</code><br>
+    Generate text that consists of only alphabet characters.<br>
+    Supported rules: <code>:length, :min_length, :max_length</code>
+  </li>
+  <li>
+    <code>:alphanumeric</code><br>
+    Generate text that consists of both alpha and numeric characters.<br>
+    Supported rules: <code>:length, :min_length, :max_length</code>
+  </li>
+  <li>
+    <code>:numeric</code><br>
+    Generate text that consists of only numeric characters.<br>
+  </li>
+</ul>
+
+<p><i>Time and Money</i></p>
+<ul style="margin: 15px;">
+  <li>
+    <code>:time</code><br>
+    Generate random time between the given start and end time if available, otherwise it'll generate random time between 'now' and 1 day from 'now'<br>
+    Supported rules: <code>:start_time, :end_time</code>.<br>
+  </li>
+  <li>
+    <code>:money</code><br>
+    Generate random money amount (of BigDecimal type) between the given min and max amount if set, otherwise it will generate random money between $0.00 and $500.75.<br>
+    Supported rules: <code>:min, :max</code>.<br>
+  </li>
+</ul>
+
+<p><i>Internet Related Content</i></p>
+<ul style="margin: 15px;">
+  <li>
+    <code>:email</code><br>
+    Generate random email address.
+  </li>
+  <li>
+    <code>:username</code><br>
+    Generate random username.
+  </li>
+  <li>
+    <code>:domain</code><br>
+    Generate random domain name.
+  </li>
+</ul>
+
+<p><i>Name Related Information</i></p>
+<ul style="margin: 15px;">
+  <li>
+    <code>:firstname</code><br>
+    Generate random first name
+  </li>
+  <li>
+    <code>:lastname</code><br>
+    Generate random last name
+  </li>
+  <li>
+    <code>:name</code><br>
+    Generate random full name (i.e. "firstname lastname")
+  </li>
+</ul>
+
+<p><i>Address Related Information</i></p>
+<ul style="margin: 15px;">
+  <li>
+    <code>:city</code><br>
+    Generate random city name
+  </li>
+  <li>
+    <code>:streetname</code><br>
+    Generate random street name
+  </li>
+  <li>
+    <code>:state</code><br>
+    Generate random state name.<br>
+    Supported rules: <code>:country, :abbr</code> :country option accepts [:us or :uk], and if :abbr is set and :country is :us, then the generated value will be the 2-letter abbreviation of the state name
+  </li>
+  <li>
+    <code>:zipcode</code><br>
+    Generate random zipcode
+    Supported rules: <code>:country</code>.  :country can be either :us or :uk
+  </li>
+  <li>
+    <code>:phone</code><br>
+    Generate random phone number
+  </li>
+</ul>
+
+<p><i>Company Related Information</i></p>
+<ul style="margin: 15px;">
+  <li>
+    <code>:company</code><br>
+    Generate random company name<br>
+    Supported rules: <code>:include_bs</code>.  When :include_bs is set to true, then the content of this field will have 2-line text, where the first line is the company name, and the second line is the company's marketing slogan.
+  </li>
+</ul>
+
+<p>Now that we know all the supported content types, let's head to the <%= chapter('next chapter', 'mack_more/data_factory/contents/association') %> to see how we can define data association.</p>
+
+<p class='note'>Go back to <%= chapter('Data Factory Home', 'mack_more/data_factory/index')%></p>

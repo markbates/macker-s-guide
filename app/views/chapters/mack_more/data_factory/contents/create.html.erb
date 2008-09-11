@@ -1,0 +1,26 @@
+<% page_title('Creating a Data Factory') %> 
+
+In order to create a valid data factory, you will need to include the <code>Mack::Data:Factory</code> module into your factory class; also make sure that your factory class is named using the following pattern: <code>{ModelName}Factory</code>.
+
+<p>Example: Let's say that we have a model called User, then the factory for User would look like the following:</p>
+
+<% code do -%>
+class UserFactory
+  include Mack::Data::Factory
+  
+  field :first_name, :content => :first_name
+  field :last_name, :content => :last_name
+  field :created_at, :content => :time, :start_time => 2.days.ago, :end_time => 1.day.from_now
+end
+<% end -%>
+
+<p>
+So, the above example says that we are building the UserFactory class, and we are also specifying what kind of data we want the factory to generate for each of the fields.<br>
+<p>To run the factory, all you have to do is do the following:</p><code>UserFactory.create(100) # create 100 user</code>
+</p>
+
+<p>Let's head to <%= chapter('Field Chapter', 'mack_more/data_factory/contents/field') %> to learn more about the field method.</p>
+
+<p class='note'>Go back to <%= chapter('Data Factory Home', 'mack_more/data_factory/index')%></p>
+
+
