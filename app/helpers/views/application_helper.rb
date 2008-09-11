@@ -12,7 +12,7 @@ module Mack
         val << link_to_function('+/-', js.toggle(sid))
         val << ']'
         val << render(:partial, "chapters/#{id}/toc")
-        val << update_page {|p| p.hide(sid)}
+        val << update_page {|p| p.hide(sid)} unless request.fullpath.match(/chapters\/#{id}/)
         val
       end
       
