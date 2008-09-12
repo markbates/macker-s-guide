@@ -1,0 +1,10 @@
+<% page_title('Environments') -%>
+
+<p>Environments as basically a way to simplify the process of maintaining configurations for different 'modes' of operations. For example when you're developing, or in the 'development' environment, you may want your log level to be <code>DEBUG</code> whereas in 'production' you may want it to be <code>ERROR</code>.</p>
+
+<p>In Mack you can switch your environment with the <code>ENV</code> parameter 'MACK_ENV':</p>
+
+<% code do -%>
+# in a Ruby file:
+ENV['MACK_ENV'] = 'production'
+<% end -%>

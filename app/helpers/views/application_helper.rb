@@ -32,7 +32,7 @@ module Mack
       
       def page_title(title = nil)
         @page_title = title unless title.nil?
-        @page_title ||= 'The Macker\'s Guide to the Universe'
+        @page_title ||= 'The Macker\'s Guide to the Galaxy'
       end
       
       def simple_link(link)
