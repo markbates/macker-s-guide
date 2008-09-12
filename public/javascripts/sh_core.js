@@ -99,46 +99,46 @@ dp.sh.Toolbar.Commands = {
 	},
 	
 	// creates an invisible iframe, puts the original source code inside and prints it
-	PrintSource: {
-		label: 'print',
-		func: function(sender, highlighter)
-		{
-			var iframe = document.createElement('IFRAME');
-			var doc = null;
-
-			// this hides the iframe
-			iframe.style.cssText = 'position:absolute;width:0px;height:0px;left:-500px;top:-500px;';
-			
-			document.body.appendChild(iframe);
-			doc = iframe.contentWindow.document;
-
-			dp.sh.Utils.CopyStyles(doc, window.document);
-			doc.write('<div class="' + highlighter.div.className.replace('collapsed', '') + ' printing">' + highlighter.div.innerHTML + '</div>');
-			doc.close();
-
-			iframe.contentWindow.focus();
-			iframe.contentWindow.print();
-			
-			alert('Printing...');
-			
-			document.body.removeChild(iframe);
-		}
-	},
+  // PrintSource: {
+  //  label: 'print',
+  //  func: function(sender, highlighter)
+  //  {
+  //    var iframe = document.createElement('IFRAME');
+  //    var doc = null;
+  // 
+  //    // this hides the iframe
+  //    iframe.style.cssText = 'position:absolute;width:0px;height:0px;left:-500px;top:-500px;';
+  //    
+  //    document.body.appendChild(iframe);
+  //    doc = iframe.contentWindow.document;
+  // 
+  //    dp.sh.Utils.CopyStyles(doc, window.document);
+  //    doc.write('<div class="' + highlighter.div.className.replace('collapsed', '') + ' printing">' + highlighter.div.innerHTML + '</div>');
+  //    doc.close();
+  // 
+  //    iframe.contentWindow.focus();
+  //    iframe.contentWindow.print();
+  //    
+  //    alert('Printing...');
+  //    
+  //    document.body.removeChild(iframe);
+  //  }
+  // },
 	
-	About: {
-		label: '?',
-		func: function(highlighter)
-		{
-			var wnd	= window.open('', '_blank', 'dialog,width=300,height=150,scrollbars=0');
-			var doc	= wnd.document;
-
-			dp.sh.Utils.CopyStyles(doc, window.document);
-			
-			doc.write(dp.sh.Strings.AboutDialog.replace('{V}', dp.sh.Version));
-			doc.close();
-			wnd.focus();
-		}
-	}
+  // About: {
+  //  label: '?',
+  //  func: function(highlighter)
+  //  {
+  //    var wnd = window.open('', '_blank', 'dialog,width=300,height=150,scrollbars=0');
+  //    var doc = wnd.document;
+  // 
+  //    dp.sh.Utils.CopyStyles(doc, window.document);
+  //    
+  //    doc.write(dp.sh.Strings.AboutDialog.replace('{V}', dp.sh.Version));
+  //    doc.close();
+  //    wnd.focus();
+  //  }
+  // }
 };
 
 // creates a <div /> with all toolbar links
@@ -668,8 +668,8 @@ dp.sh.HighlightAll = function(name, showGutter /* optional */, showControls /* o
 		// hide the original element
 		element.style.display = 'none';
 
-    // highlighter.noGutter = (showGutter == null) ? IsOptionSet('nogutter', options) : !showGutter;
-    highlighter.noGutter = true;
+    highlighter.noGutter = (showGutter == null) ? IsOptionSet('nogutter', options) : !showGutter;
+    // highlighter.noGutter = true;
     // highlighter.addControls = (showControls == null) ? !IsOptionSet('nocontrols', options) : showControls;
     // highlighter.addControls = false;
 		highlighter.collapse = (collapseAll == null) ? IsOptionSet('collapse', options) : collapseAll;

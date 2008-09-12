@@ -1,0 +1,14 @@
+<% page_title('Rake') -%>
+
+<p>Mack uses Rake tasks to accomplish a lot of different tasks. A full list of these tasks can be obtained by doing the following:</p>
+
+<% code do -%>
+$ rake -T
+<% end -%>
+
+<p>You can change the environment that a Rake task runs in by one of two ways. Both of these will produce the same results:</p>
+
+<% code(:cl) do -%>
+$ rake mack:dump:config MACK_ENV=production
+$ rake mack:dump:config#production
+<% end -%>
