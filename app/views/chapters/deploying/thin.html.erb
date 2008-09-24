@@ -1,0 +1,40 @@
+<% page_title('Thin') -%>
+
+<p><%= simple_link('Thin', 'http://code.macournoyer.com/thin/') %> is a very fast and efficient web server that supports Mack very, very well.</p>
+
+<p>To Mack with Thin is very easy.</p>
+
+<% code(:cl) do -%>
+$ mackery server
+<% end -%>
+
+<p>If you now point your browser to <%= simple_link('http://localhost:3000') %> you'll have access to your Mack application.</p>
+
+<p>Changing the port and the environment is as simple as a few flags:</p>
+
+<% code(:cl) do -%>
+$ mackery server -e production -p 80
+<% end -%>
+
+<p>The <code>mackery server</code> command will forward any flags on to Thin under the covers, so you can easily configure it.</p>
+
+<p>If you'd like to make configuration even easier, or if you have really complicated configuration settings. You can create a YAML file and pass it in with <code>-C</code> flag:</p>
+
+<% code(:cl) do -%>
+$ mackery server -C config/thin.yml
+<% end -%>
+
+<% code(:yml) do -%>
+# config/thin.yml
+--- 
+pid: tmp/pids/thin.pid
+log: log/thin.log
+timeout: 30
+max_conns: 1024
+port: 3000
+max_persistent_conns: 512
+environment: production
+daemonize: true
+address: 0.0.0.0
+servers: 3
+<% end -%>

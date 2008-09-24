@@ -29,4 +29,4 @@ dp.sh.Brushes.Ruby = function()
 }
 
 dp.sh.Brushes.Ruby.prototype = new dp.sh.Highlighter();
-dp.sh.Brushes.Ruby.Aliases = ['ruby', 'rails', 'ror'];
+dp.sh.Brushes.Ruby.Aliases = ['ruby', 'rails', 'ror', 'yml'];
