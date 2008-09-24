@@ -1,0 +1,28 @@
+<% page_title 'View Layouts' %>
+
+<p>
+  The core usage of layout is discussed in <%= chapter('Controllers/Layouts', 'controllers/layouts') %>.  In this chapter we will just recap on what's involved in the layout world from view's point of view (and will discuss the assets related topic)
+</p>
+
+<p>
+  By default, generated mack application will have a layout file, <code>application.html.erb</code>, defined in <code>app/views/layouts</code>.  This is the place to put all your other layout files.  In each layout file, you will design the page layout, and at the location of which to display the page content, you should always call <code><%%= yield_to :view %></code>--this will signal the framework to get the rendered content inserted into this location in the page layout as part of the render process.
+</p>
+
+<p>
+  A note about page layout.  This is an ideal place to design a common page layout for your application, so it typically includes common area of the page (e.g. page title, navigation, etc.); and it should also include header related content (including: stylesheets and javascripts references).
+</p>
+
+<p>  
+  When you need to add assets related content (e.g. stylesheets and javascripts), it's recommended that you use the <code>stylesheet</code> and <code>javascript</code> methods; as they will be able to correctly resolve the specified file name(s) into correct path.  Using these methods is very crucial when you're designing your application in a distributed environment (i.e. using mack-distributed gem) or using asset hosts, as the framework will correctly figure out where the assets are located.
+</p>
+<p>
+  Example on how to use the stylesheet and javascript methods:
+<% code do -%>
+
+<%%= stylesheet [:one, :two] # this will generate 2 stylesheet tags for "one.css" and "two.css" %>
+<%%= javascript [:jquery, 'jquery-fx', 'jquery-ui'] # this will generate 3 script tags %>
+
+# note: if you only need to use 1 asset file, then you don't need the array.
+<%%= stylesheet :one %>
+<% end -%>
+</p>
