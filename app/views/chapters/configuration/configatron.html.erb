@@ -1,0 +1,83 @@
+<% page_title('Configatron') -%>
+
+<p>Mack uses the <%= simple_link('configatron', 'http://configatron.mackframework.com') %> gem to configure itself, and your application. To do configurations there are 4 files that are generated with your Mack application:</p>
+
+<ul>
+  <li>config/configatron/default.rb</li>
+  <li>config/configatron/development.rb</li>
+  <li>config/configatron/testing.rb</li>
+  <li>config/configatron/production.rb</li>
+</ul>
+
+<p>Any configurations you place into the default.rb file will be global across all environments. The settings also override any settings that are 'defaults' in Mack itself. When you start your application, or load the Mack environment, the corresponding file for that environment will be loaded. These settings will override any settings set in default.rb</p>
+
+<% code do -%>
+# default.rb
+configatron.app_timeout = 10.minutes
+configatron.log_file = 'error.log'
+
+# development.rb
+configatron.app_timeout = 1.second
+<% end -%>
+
+<p>When you load your application in development mode the <code>app_timeout</code> will be set to 1 second, whereas in production and test mode it will be set to 10 minutes. Regardless of what environment you're in the log_file setting will be 'error.log'</p>
+
+<% code do -%>
+# development mode:
+configatron.app_timeout # => 1
+configatron.log_file # => 'error.log'
+
+# production or test mode:
+configatron.app_timeout # => 600
+configatron.log_file # => 'error.log'
+<% end -%>
+
+<p>To see what your environment's, default is 'development' configuration settings are you can run this rake task:</p>
+
+<% code(:cl) do -%>
+$ rake mack:dump:config
+<% end -%>
+
+<p>which will produce something like this:</p>
+
+<% code do -%>
+{
+  :log => {
+    :colors => {
+      :error => :red, 
+      :fatal => :red, 
+      :warn => :yellow, 
+      :completed => :purple, 
+      :db => :cyan
+    }, 
+    :root=>"/Users/markbates/foo/log/", 
+    :detailed_requests => true, 
+    :level => :debug,
+    :disable_initialization_logging => false
+  },
+ :default_secret_key => "B56F65GZRSMSPRCF4W6YD4HPJXJBKFA83LYRKW5NANMB8WLSRCADWCMXC7HJ7JB8YW5FH6SYW7FYSHPS",
+ :mack => {
+   :disable_transactional_tests => false, 
+   :test_case_file_pattern => "test/**/*_test.rb", 
+   :render_url_timeout => 5, 
+   :cookie_values => {:path=>"/"}, 
+   :path => "/", 
+   :session_store => :cookie, 
+   :cache_classes => false, 
+   :data_mapper_session_store => {:expiry_time => 14400},
+   :cookie_session_store => {:expiry_time => 14400}, 
+   :site_domain => "http://localhost:3000", 
+   :use_lint => true, 
+   :testing_framework => "rspec", 
+   :disable_forgery_detector => false, 
+   :show_exceptions => true, 
+   :assets => {
+     :hosts => "", 
+     :max_distribution => 4
+   }, 
+   :use_sessions => true, 
+   :rspec_file_pattern => "test/**/*_spec.rb", 
+   :session_id => "_foo_session_id"
+  }
+}
+<% end -%>
