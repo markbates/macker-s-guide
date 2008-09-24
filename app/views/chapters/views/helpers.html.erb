@@ -1,0 +1,43 @@
+<% page_title 'View Helpers'%>
+
+<p>
+  View Helpers are used to provide shareable codes among all views.  All view helper modules are managed in <code>Mack::ViewHelpers</code> namespace; that being said, if you define a class within the Mack::ViewHelpers namespace, it will automatically gets included into all views.  By default, all generated mack applications will have a view helper, <code>Mack::ViewHelpers::ApplicationHelper</code>.
+</p>
+
+<p>
+  The following is an example on how you can define your own shareable code in view helper module:
+<% code do -%>
+# my_view_helper.rb
+module Mack
+  module ViewHelpers
+    module MyViewHelper
+      def say_hi
+        "Hi from MyViewHelper"
+      end
+    end
+  end
+end
+
+# application_helper.rb
+module Mack
+  module ViewHelpers
+    module ApplicationHelper
+      def do_something
+        "Here's a random number: #{rand(1000)}"
+      end
+    end
+  end
+end
+
+# /views/users/index.html.erb
+...
+<%%= say_hi %><br>
+<%%= do_something %><br>
+...
+
+# The view code when rendered will include the following string:
+"Hi from MyViewHelper"<br>
+"Here's a random number: 895"<br>
+<% end -%>
+
+</p>
