@@ -7,13 +7,16 @@ module Mack
       # Anything in this module will be included into all views
       
       def toc(id)
-        sid = "#{id}_toc"
-        val = '['
-        val << link_to_function('+/-', js.toggle(sid))
-        val << ']'
-        val << render(:partial, "chapters/#{id}/toc")
-        val << update_page {|p| p.hide(sid)} unless request.fullpath.match(/chapters\/#{id}/)
-        val
+        if File.exists?(Mack::Paths.views('chapters', id.to_s, '_toc.html.erb'))
+          sid = "#{id}_toc"
+          val = '['
+          val << link_to_function('+/-', js.toggle(sid))
+          val << ']'
+          val << render(:partial, "chapters/#{id}/toc")
+          val << update_page {|p| p.hide(sid)} unless request.fullpath.match(/chapters\/#{id}/)
+          return val
+        end
+        return ''
       end
       
       def code(type = :ruby, &block)
@@ -23,16 +26,22 @@ module Mack
       end
       
       def chapter(title, view)
+        # vs = view.split('/')
+        # vs.pop
+        # v = vs.join('/')
+        chap = ''
         if File.exists?(Mack::Paths.views('chapters', view + '.html.erb'))
-          link_unless_current(title, chapters_show_url(:view => view.gsub('/', '-')))
+          chap << link_unless_current(title, chapters_show_url(:view => view.gsub('/', '-')))
         else
-          title
+          chap << title
         end
+        #chap << toc(v)
+        chap
       end
       
       def page_title(title = nil)
         @page_title = title unless title.nil?
-        @page_title ||= 'The Macker\'s Guide to the Universe'
+        @page_title ||= 'The Macker\'s Guide to the Galaxy'
       end
       
       def simple_link(link)
