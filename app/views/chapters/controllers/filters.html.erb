@@ -1,0 +1,45 @@
+<% page_title 'Filters' %>
+
+<p>
+  There are three types of filters in Mack: <code>Before-Filter, After-Filter, and After-Render-Filter</code>.
+</p>
+
+<p>
+  Filter must be scoped to the controller that uses it.  When defining a filter type, you can also designate which actions in the controller are to use the filter (or define which actions in the controller are to be excluded by the filter execution.)  Also note that when defining which filter to use, make sure that the method is accessible from that controller (i.e. either the method comes from the same scope as the controller, or it comes from some controller helper module).
+</p>
+
+<p>
+  Here's some ideas on when to use which filter type:<br>
+  <ul>
+    <li>
+      <code>before_filter</code>.<br>
+      Since it's run before an action of a controller, it's a good place to setup common elements that are needed by the actions; it's also the perfect place to do user authentication (since it's guarantee that the authentication code will get run before the actual action).
+    </li>
+    <li>
+      <code>after_filter</code>.<br>
+      After-Filter gets run after the action is executed.  This is a great place to set up common elements for a view, that depend on stuff from inside your action. Because nothing has been 'rendered' yet, you still can add new instance variables, and alter ones created in the action.
+    </li>
+    <li>
+      <code>after_render filter</code>.<br>
+      After-Render-Filter is run after the rendering has happened; at this point there is an instance variable, <tt>@final_rendered_action</tt>, that is available on which work can be done. This variable will have any layouts rendered to, any Erubis::Eruby will have been processed, etc... It should be the final String that will get rendered to the screen. This is a great place to do things like write a log, gzip, etc...
+    </li>
+  </ul>
+</p>
+
+<p>
+  The following is an example on how to define filter in a controller.
+  <% code do -%>
+class MyAwesomeController
+  include Mack::Controller
+  
+  # all actions in this controller will have this filter run:
+  before_filter: authenticate
+  
+  # only the show and index actions in this controller will have this filter run:
+  before_filter: load_side_bar, :only => [:show, :index]
+  
+  # all actions, except for the create action will have this filter run.
+  after_filter: write_to_log, :except => :create
+end
+  <% end -%>
+</p>
