@@ -2,7 +2,7 @@
 dp.sh.Brushes.Ruby = function()
 {
   var keywords =	'alias and BEGIN begin break case class def define_method defined do each else elsif ' +
-					'END end ensure false for if in module new next nil not or raise redo rescue retry return ' +
+					'END end ensure false for if in module new next nil not or raise redo rescue retry return require load' +
 					'self super then throw true undef unless until when while yield';
 
   var builtins =	'Array Bignum Binding Class Continuation Dir Exception FalseClass File::Stat File Fixnum Fload ' +

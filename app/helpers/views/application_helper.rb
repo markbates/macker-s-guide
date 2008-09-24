@@ -44,8 +44,8 @@ module Mack
         @page_title ||= 'The Macker\'s Guide to the Galaxy'
       end
       
-      def simple_link(link)
-        link_to(link, link, :target => :_blank)
+      def simple_link(text, link = text)
+        link_to(text, link, :target => :_blank)
       end
       
       def mack_more

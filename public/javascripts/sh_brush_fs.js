@@ -28,4 +28,4 @@ dp.sh.Brushes.Fs = function()
 }
 
 dp.sh.Brushes.Fs.prototype = new dp.sh.Highlighter();
-dp.sh.Brushes.Fs.Aliases = ['fs', 'file_system', 'cl'];
+dp.sh.Brushes.Fs.Aliases = ['fs', 'file_system', 'cl', 'text'];

@@ -1,0 +1,66 @@
+<% page_title('Passenger (mod_rails)') -%>
+    
+<p>Mack applications can very easily be deployed to Apache2 using <%= simple_link("Phusion's passenger", "http://www.modrails.com/") %>, aka mod_rails.</p>
+
+<p>Create a config.ru file in the root of your Mack application:</p>
+
+<% code do -%>
+## config.ru ##
+ENV["MACK_ENV"] = ENV["RACK_ENV"]
+load "Rakefile"
+require 'rubygems'
+require 'mack'
+run Mack::Utils::Server.build_app
+<% end -%>
+
+<p>In Mack version >= 0.7.1 you can use the Passenger generator to generate the file for you:</p>
+
+<% code(:cl) do -%>
+$ rake generate:passenger
+<% end -%>
+
+<p>Next you need to install the Passenger gem and the Apache module:</p>
+
+<% code(:cl) do -%>
+$ sudo gem install passenger
+$ sudo passenger-install-apache2-module
+<% end -%>
+
+<p>Once you get everything installed you need to load the Passenger module in your Apache httpd.conf file:</p>
+
+<% code(:text) do -%>
+## Sample load ##
+# Passenger (Mod_Rails)
+LoadModule passenger_module /opt/local/lib/ruby/gems/1.8/gems/passenger-2.0.3/ext/apache2/mod_passenger.so
+PassengerRoot /opt/local/lib/ruby/gems/1.8/gems/passenger-2.0.3
+PassengerRuby /opt/local/bin/ruby  
+<% end -%>
+
+<p>Now configure the virutal host in httpd.conf:</p>
+
+<% code(:text) do -%>
+## Sample virtual host ##
+<VirtualHost *:80>
+    ServerName www.example.com
+    DocumentRoot "/path/to/your/mack/app/public"
+</VirtualHost>
+<% end -%>
+
+<p>In development you might have to edit your hosts file to point your url to your local dev box:</p>
+
+<% code(:text) do -%>
+## Sample host ##
+127.0.0.1 www.example.com
+<% end -%>
+
+<p>Because of an incompatibility with Rack and Passenger you'll need to disable the use of Rack::Lint. This can be done in your config/configatron/default.rb like such:</p>
+
+<% code do -%>
+configatron.mack.use_lint = false
+<% end -%>
+
+<p>Now restart Apache and you should be all set:</p>
+
+<% code(:cl) do -%>
+$ sudo apachectl graceful
+<% end -%>
