@@ -4,3 +4,38 @@
   Layout files for Mack application are stored in <code>app/views/layouts</code> folder.  When a Mack application is first generated, it will have a default layout file, <code>application.html.erb</code>.  This layout file will be used by all the views defined in the application, unless otherwise specified.  This section of the document will discuss how we can control which layout to use in a controller, and also take a peek at the inside of the layout file.
 </p>
 
+<p>
+  Layout usage is defined in a controller.  It can either be set globally (i.e. all action will use that layout), or on a per action basis; Layout can also be turned off if desired.<br>
+  The following code shows how to set the layout globally:
+  <code>
+class MyController
+  include Mack::Controller
+  
+  layout :my_cool_layout
+end
+  </code>
+  
+  The following will set the layout per action:
+  <code>
+class MyController
+  include Mack::Controller
+  
+  def index
+    render(:text, "I've used a custom layout in the action!", :layout => :my_cool_layout)
+  end
+end
+  </code>
+  
+  Also note that by setting the layout explicitly in an action, it will overwrite the global layout setting.
+  <code>
+class MyController
+  include Mack::Controller
+  
+  layout :application
+  
+  def index
+    render(:text, "I've changed the layout in the action!", :layout => :my_cool_layout)
+  end
+end
+  </code>
+</p>
