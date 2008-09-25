@@ -26,16 +26,12 @@ module Mack
       end
       
       def chapter(title, view)
-        # vs = view.split('/')
-        # vs.pop
-        # v = vs.join('/')
         chap = ''
         if File.exists?(Mack::Paths.views('chapters', view + '.html.erb'))
           chap << link_unless_current(title, chapters_show_url(:view => view.split('/')))
         else
           chap << title
         end
-        #chap << toc(v)
         chap
       end
       
