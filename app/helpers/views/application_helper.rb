@@ -60,7 +60,7 @@ module Mack
         end
       end
       
-      def link_unless_current(text, link = text, option = {})
+      def link_unless_current(text, link = text, options = {})
         unless link == request.fullpath
           return link_to(text, link, options)
         end
