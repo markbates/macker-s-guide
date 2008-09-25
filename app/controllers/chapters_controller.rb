@@ -4,7 +4,7 @@ class ChaptersController
   cache_pages
   
   def show
-    render(:action, params[:view].gsub('-', '/'))
+    render(:action, File.join(params[:view]))
   end
   
 end
