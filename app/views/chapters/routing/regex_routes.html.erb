@@ -1,0 +1,13 @@
+<% page_title('Regex Routes') -%>
+
+<p>The routing system in Mack, as of version 0.8.0, support regular expressions, as well as Strings, to match a url with. For example:</p>
+
+<% code do -%>
+Mack::Routes.build do |r| 
+  r.connect(/[a-z]{4}\/\D{2}\/cool/, :controller => :coolness, :action => :mark)
+end
+<% end -%>
+
+<p>Now if a request that comes in that looks like this '/mark/is/cool' it will match our defined route and be sent to <code>CoolnessController#mark</code>.</p>
+
+<p class='note'>NOTE: When using regular expressions for your routes, you will not have support for 'embedded parameters' as you would if you used a String.</p>
