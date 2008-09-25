@@ -5,7 +5,7 @@
 </p>
 
 <p>
-  By default, generated mack application will have a layout file, <code>application.html.erb</code>, defined in <code>app/views/layouts</code>.  This is the place to put all your other layout files.  In each layout file, you will design the page layout, and at the location of which to display the page content, you should always call <code><%%= yield_to :view %></code>--this will signal the framework to get the rendered content inserted into this location in the page layout as part of the render process.
+  By default, generated mack application will have a layout file, <code>application.html.erb</code>, defined in <code>app/views/layouts</code>.  This is the place to put all your other layout files.  In each layout file, you will design the page layout, and at the location of which to display the page content, you should always call <code>&lt;%= yield_to :view %></code>--this will signal the framework to get the rendered content inserted into this location in the page layout as part of the render process.
 </p>
 
 <p>
@@ -19,10 +19,10 @@
   Example on how to use the stylesheet and javascript methods:
 <% code do -%>
 
-<%%= stylesheet [:one, :two] # this will generate 2 stylesheet tags for "one.css" and "two.css" %>
-<%%= javascript [:jquery, 'jquery-fx', 'jquery-ui'] # this will generate 3 script tags %>
+&lt;%= stylesheet [:one, :two] # this will generate 2 stylesheet tags for "one.css" and "two.css" %>
+&lt;%= javascript [:jquery, 'jquery-fx', 'jquery-ui'] # this will generate 3 script tags %>
 
 # note: if you only need to use 1 asset file, then you don't need the array.
-<%%= stylesheet :one %>
+&lt;%= stylesheet :one %>
 <% end -%>
 </p>
