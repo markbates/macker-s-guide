@@ -1,4 +1,4 @@
-yml = 'thin.yml'
+start_command = "-C /home/#{user}/#{application}/current/config/thin.yml"
 if ENV["EDGE"]
   # here is a good standard example
   set :application, "edge_macker_guide"
@@ -6,7 +6,7 @@ if ENV["EDGE"]
   set :domain, "edge.mackery.com"  # your domain.com for this app
 
   set :branch, "edge" #this is the branch you want. most likely master
-  yml = 'edge_thin.yml'
+  start_command = "-R /home/#{user}/#{application}/current/config/edge_thin.ru #{start_command}"
 else
   # here is a good standard example
   set :application, "macker_guide"
@@ -53,13 +53,15 @@ end
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     # sudo "thin restart -s 3 -e production -c /home/#{user}/#{application}/current/"
-    sudo "thin restart -C /home/#{user}/#{application}/current/config/#{yml}"
+    sudo "thin restart #{start_command}"
   end
   task :start, :roles => :app do
-    sudo "thin start -C /home/#{user}/#{application}/current/config/#{yml}"
+    sudo "thin start #{start_command}"
+    # sudo "cd /home/#{user}/#{application}/current; mackery server start #{start_command}"
   end
   task :stop, :roles => :app do
-    sudo "thin stop -C /home/#{user}/#{application}/current/config/#{yml}"
+    sudo "thin stop #{start_command}"
+    # sudo "cd /home/#{user}/#{application}/current; mackery server stop #{start_command}"
   end
   
   task :migrate, :roles => :db, :only => { :primary => true } do
