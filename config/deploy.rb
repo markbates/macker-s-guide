@@ -1,4 +1,3 @@
-start_command = "-C /home/#{user}/#{application}/current/config/thin.yml"
 if ENV["EDGE"]
   # here is a good standard example
   set :application, "edge_macker_guide"
@@ -6,7 +5,6 @@ if ENV["EDGE"]
   set :domain, "edge.mackery.com"  # your domain.com for this app
 
   set :branch, "edge" #this is the branch you want. most likely master
-  start_command = "-R /home/#{user}/#{application}/current/config/edge_thin.ru #{start_command}"
 else
   # here is a good standard example
   set :application, "macker_guide"
@@ -16,6 +14,12 @@ else
   set :branch, "master" #this is the branch you want. most likely master
 end
 set :user, "markbates" # your username on slicehost
+
+start_command = "-C /home/#{user}/#{application}/current/config/thin.yml"
+
+if ENV["EDGE"]
+  start_command = "-C /home/#{user}/#{application}/current/config/edge_thin.yml"
+end
 
 #from http://github.com/guides/deploying-with-capistrano
 default_run_options[:pty] = true
