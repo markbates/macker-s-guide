@@ -1,0 +1,138 @@
+<% page_title('Distributed') -%>
+
+<p>Building distributed applications with Mack is quick an easy using the mack-distributed gem that can be found in versions of Mack >= 0.7.0.</p>
+
+<h2>'Server' side</h2>
+
+<p><em>It should be noted that although we're going to be talking about a 'server' app and a 'client' app, the mack-distributed packages allows for a many-to-many relationship, as far as services go, all apps can be both servers and clients.</em></p>
+
+<p>Server-side configuration is a snap. First we need to require the mack-distributed gem:</p>
+
+<% code do -%>
+# config/initializers/gems.rb
+require_gems do |gem|
+  gem.add "mack-data_mapper", :libs => "mack-data_mapper"
+  gem.add "mack-distributed", :libs => "mack-distributed"
+end
+<% end -%>
+
+<p>Then we need to make a few configuration setting changes:</p>
+
+<% code do -%>
+# config/configatron/default.rb or your <environment>.rb file of choice
+
+# Share your routes? true/false
+configatron.mack.distributed.share_routes = true
+# Share your objects? true/false
+configatron.mack.distributed.share_objects = true
+# Share your views/layouts? true/false
+configatron.mack.distributed.share_views = true
+# What is the UNIQUE name for this application?
+# This is used to be able to register the services
+# for this application with Rinda. It's also used
+# so other applications can look up those services
+# directly.
+configatron.mack.distributed.app_name = 'my_cool_app'
+# What is the fully qualified host for this application?
+# This is used for building the full url for distributed
+# routes.
+configatron.mack.distributed.site_domain = 'http://www.example.com'
+<% end -%>
+
+<p>Once we've required the mack-distributed gem and have made our configuration changes all we really need to do is to start the mack_ring_server binary like so:</p>
+
+<% code(:cl) do -%>
+$ mack_ring_server start
+<% end -%>
+
+<p>If we were to start the 'server' app right now it would register it's routes and views/layouts with <code>Rinda</code>, and other applications would be able to find and use them.</p>
+
+<p>If we want to register an <code>Object</code> with <code>Rinda</code>, that's really easy too. Let's pretend we have a User class, to share that class with our other applications we simply make the class look like this:</p>
+
+<% code do -%>
+class User
+  # By including Mack::Distributable this class will now
+  # be registered with Rinda for other Mack applications 
+  # to use.
+  include Mack::Distributable
+
+  def self.all
+    # code here...
+  end
+  
+  def self.authenticate(username, password)
+    # code here....
+  end
+  
+  def display_name
+    # code here...
+  end
+  
+end
+<% end -%>
+
+<h2>'Client' side</h2>
+
+<p>All we need to do in our client application is require the mack-distributed gem:</p>
+
+<% code do -%>
+# config/initializers/gems.rb
+require_gems do |gem|
+  gem.add "mack-data_mapper", :libs => "mack-data_mapper"
+  gem.add "mack-distributed", :libs => "mack-distributed"
+end
+<% end -%>
+
+<p>If were to fire up the Mack console we could do something like this:</p>
+
+<% code do -%>
+Mack::Distributed::User.all
+<% end -%>
+
+<p>And it will call the <em>all</em> class method on the <code>User</code> class in our 'server' application. You can call any class level method on the User object at this point. Distributed objects/classes behave just as if they were local.</p>
+
+<p>This works by using the 'magical' <code>Mack::Distributed</code> module. It will automatically look up the class you call in that module with <code>Rinda</code> and return back a proxy to the server app that houses that service.</p>
+
+<p>If you want to get a particular service, from a particular application you can look it up like so:</p>
+
+<% code do -%>
+Mack::Distributed.lookup("distributed://my_cool_app/User")
+<% end -%>
+
+<p>Using distributed routes in your views is also just as easy. You just need to know the name of the application that houses the route you want, and what the name of the route you want is.</p>
+
+<p>Let's assume your 'server' application has a routes file that looks like this:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+
+  r.login "/users/login", :controller => :users, :action => :login
+  r.do_login "/users/login", :controller => :users, :action => :do_login, :method => :post
+
+  r.resource :users # Added by rake generate:scaffold name=user
+  
+  r.with_options(:controller => :pages) do |map|
+    map.newest_pages "/pages/newest_pages/:limit", :action => :newest_pages
+    map.recently_updated_pages "/pages/recently_updated_pages/:limit", :action => :recently_updated_pages
+  end
+  
+  r.resource :pages # Added by rake generate:scaffold name=page
+  
+  r.handle_error Miki::PageNotFoundError, :controller => :pages, :action => :not_found
+  
+  r.wiki_page "/:url", :controller => :pages, :action => :display
+  
+  r.home_page "/", :controller => :pages, :action => :display, :url => "home"
+  
+  r.defaults
+  
+end
+<% end -%>
+
+<p>In our client application we can get access to the url for the users index page like this:</p>
+
+<% code do -%>
+&lt;%= distributed_url(:my_cool_app, :users_index_url) %>
+<% end -%>
+
+<p>In our example that would return: 'http://www.example.com/users'</p>
