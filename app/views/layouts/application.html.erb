@@ -13,12 +13,20 @@
   <%= google_analytics('UA-4007638-5') %>
 </head>
 <body>
-<% if Mack.env == 'production' -%>
+<% if configatron.show_header_footer -%>
 <div id="header">
   <div id="logo">
     <a href="http://www.mackframework.com" title="Mack Framework">Mack Framework</a>
     <h1>A Distributed Ruby Web Application Framework</h1>
   </div>
+</div>
+<div id="nav">
+  <a href="http://www.mackframework.com">home</a>
+  <a href="http://www.mackframework.com/about/" title="about">about</a>
+  <a href="http://www.mackframework.com/archives/" title="archives">archives</a>
+  <a href="http://www.mackframework.com/contribute/" title="contribute">contribute</a>
+  <a href="http://www.mackframework.com/support/" title="support">support</a>
+  <a href="/">user guide</a>
 </div>
 <% end -%>
 
@@ -39,7 +47,7 @@ dp.SyntaxHighlighter.HighlightAll('code');
 
 <div id='for_version' class='note'>This guide was written for Mack version 0.7.9.100</div>
 
-<% if Mack.env == 'production' -%>
+<% if configatron.show_header_footer -%>
 <div id="footer">
   <p>&copy; Mack Framework</p>
 </div>

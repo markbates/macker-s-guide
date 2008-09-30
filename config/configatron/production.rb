@@ -8,3 +8,5 @@ require 'logger'
 log_2 = Logger.new(Mack::Paths.log("cachetastic.log"))
 log_2.level = Logger::ERROR
 configatron.cachetastic_default_options.logger = [log_2]
+
+configatron.show_header_footer = true
