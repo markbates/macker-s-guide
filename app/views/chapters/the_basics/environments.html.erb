@@ -8,3 +8,17 @@
 # in a Ruby file:
 ENV['MACK_ENV'] = 'production'
 <% end -%>
+
+<p>You can programatically get the environment like this:</p>
+
+<% code do -%>
+Mack.env # => 'development'
+<% end -%>
+
+<p>You can test the environment like this:</p>
+
+<% code do -%>
+# assuming you are in the development environment:
+Mack.env?(:development) # => true
+Mack.env?(:test) # => fase
+<% end -%>
