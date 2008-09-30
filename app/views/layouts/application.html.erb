@@ -6,14 +6,11 @@
   <title><%= page_title %></title>
   <%= stylesheet [:sh, :main] %>
   <%= javascript [:jquery, 'jquery-fx', 'jquery-ui', :sh_core, :sh_brush_ruby, :sh_brush_fs] %>
-  <script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-  var pageTracker = _gat._getTracker("UA-4007638-5");
-  pageTracker._trackPageview();
-  </script>
+  
+  <!-- edge: -->
+  <%= google_analytics('UA-4007638-6') %>
+  <!-- www: -->
+  <%= google_analytics('UA-4007638-5') %>
 </head>
 <body>
 <% if Mack.env == 'production' -%>
