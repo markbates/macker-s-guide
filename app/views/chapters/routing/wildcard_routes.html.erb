@@ -1,0 +1,31 @@
+<% page_title('Wildcard Routes') -%>
+
+<p>With 'wildcard' routes you capture n segments of your url and get them back as parameters. Let's take a look at a couple of examples, to make this easier to understand:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.connect '/chapters/*chaps', :controller => :chapters, :action => :show
+  r.authors '/a/*authors/z', :controller => :books, :action => :peeps
+end
+<% end -%>
+  
+<p>Wildcards are defined in when building routes by using a '*' instead of the normal ':' for capturing embedded parameters. Here are some examples:</p>
+
+<% code do -%>
+Mack::Routes.retrieve('/chapters/1/2/3') 
+  # => {:chaps => ['1', '2', '3'], :format => 'html', :controller => :chapters, :action => :show, :method => :get}
+Mack::Routes.retrieve('/chapters/1') 
+  # => {:chaps => ['1'], :format => 'html', :controller => :chapters, :action => :show, :method => :get}
+Mack::Routes.retrieve('/a/me/z') 
+  # => {:authors => ['me'], :format => 'html', :controller => :books, :action => :peeps, :method => :get}
+Mack::Routes.retrieve('/a/me/you/z') 
+  # => {:authors => ['me', 'you'], :format => 'html', :controller => :books, :action => :peeps, :method => :get}
+<% end -%>
+
+<p>As you can see in the first example we said everything that comes after '/chapters/' should get sent to the <code>:chaps</code> parameter. Wildcard parameters will also get returned as an <code>Array</code>. So when we have the url '/chapters/1/2/3' we end up with a parameter called <code>:chaps</code> that is an <code>Array</code> containing the values, '1', '2', and '3'.</p>
+
+<p>The reverse of this is also true. We can build wildcard urls as well:</p>
+
+<% code do -%>
+authors_url(:authors => ['me', 'you']) # => '/a/me/you/z'
+<% end -%>
