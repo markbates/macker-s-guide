@@ -88,6 +88,11 @@ ul {
   font: normal 1.6em "Helvetica Neue", Helvetica, Arial, sans-serif; 
 }
 
+#footer_padding {
+  clear: both;
+  padding-top: 10px;
+}
+
 #footer { 
   padding: 0.8em 0; 
   background: #000; 
