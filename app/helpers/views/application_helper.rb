@@ -28,7 +28,7 @@ module Mack
       def chapter(title, view)
         chap = ''
         if File.exists?(Mack::Paths.views('chapters', view + '.html.erb'))
-          chap << link_unless_current(title, chapters_show_url(:view => view.split('/')))
+          chap << alink_unless_current(title, chapters_show_url(:view => view.split('/')))
         else
           chap << title
         end
@@ -56,7 +56,7 @@ module Mack
         end
       end
       
-      def link_unless_current(text, link = text, options = {})
+      def alink_unless_current(text, link = text, options = {})
         unless link == request.fullpath
           return link_to(text, link, options)
         end
