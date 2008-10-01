@@ -18,10 +18,21 @@ a:hover {
 
 #toc {
   float: right;
+  clear: right;
   border-style: solid;
   margin-left: 10px;
   padding-left: 20px;
   min-width: 250px;
+}
+
+#search {
+  float: right;
+  border-style: solid;
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  min-width: 250px;
+  margin-bottom: 10px;
 }
 
 ul {

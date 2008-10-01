@@ -1,0 +1,11 @@
+<% page_title("Search: '#{params[:query]}'") -%>
+
+<h2>There were <%= pluralize_word(@results.size, 'result') %> that matched your query.</h2>
+
+<% unless @results.empty? -%>
+<ol>
+  <% @results.each do |res| -%>
+    <li><p><%= res.simple_body.truncate(200) %><br><%= chapter("#{request.full_host}/#{res.url}", res.url) %></p></li>
+  <% end -%>
+</ol>
+<% end -%>

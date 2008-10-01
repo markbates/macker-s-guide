@@ -32,6 +32,12 @@
 
 <div id="wrapper">
 
+  <div id='search'>
+    <% form(search_url) do -%>
+      <%= :query.text_field %>
+      <%= submit_button 'Search' %>
+    <% end -%>
+  </div>
   <div id="toc"><%= render(:partial, 'chapters/toc') %></div>
   <div id="main">
     <h1><%= page_title %></h1>
