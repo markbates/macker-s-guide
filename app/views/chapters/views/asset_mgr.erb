@@ -1,0 +1,15 @@
+<% page_title "Asset Manager" %>
+
+<p>
+  The Asset Manager module of a mack application allows developer to define a group of asset files (e.g. javascript and/or stylesheet files), and then refer to them using the bundle instead of listing them individually.
+</p>
+<p>
+  When the application is loaded, there's a global reference to the asset manager instance (asset_mgr) that you can use to: create new bundle, access existing bundle, or query all the defined bundles.
+</p>
+<p>
+  If you are to create asset bundles, it is recommended that you create a file (e.g. assets.rb) in config/initializers folder.  This way, when the application is loaded, the file will be required, which in turns will define all the bundles you need.
+</p>
+<% code do %>
+  # create a new asset bundle
+  assets_mgr.
+<% end %>

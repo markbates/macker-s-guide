@@ -45,7 +45,7 @@ module Mack
       end
       
       def mack_more
-        [:active_record, :caching, :data_factory, :data_mapper, :distributed, :encryption, :facets, :haml, :javascript, :localization, :markaby, :notifier, :orm, :pdf_writer]
+        [:active_record, :asset_packager, :caching, :data_factory, :data_mapper, :distributed, :encryption, :facets, :haml, :javascript, :localization, :markaby, :notifier, :orm, :pdf_writer]
       end
       
       def mack_more_chapter(name)
