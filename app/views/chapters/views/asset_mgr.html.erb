@@ -1,0 +1,63 @@
+<% page_title "Asset Manager" %>
+
+<p>
+  The Asset Manager module of a mack application allows developers to define a group of asset files (e.g. javascript and/or stylesheet files), and then refer to them using the bundle instead of listing them individually.
+</p>
+
+<p>
+  When the application is loaded, there's a global reference to the asset manager instance (asset_mgr) that you can use to: create new bundle, access existing bundle, or query all the defined bundles.
+</p>
+
+<p>
+  If you are to create asset bundles, it is recommended that you create a file (e.g. assets.rb) in config/initializers folder.  This way, when the application is loaded, the file will be required, which in turns will define all the bundles you need.
+</p>
+
+<p>
+  The ability to bundle up asset files will not only make the erb file simpler, but it will also open up the opportunity to package and compress asset files before returning the response to the client.  The packaging and compression will not be discuss in this document, but will be discussed in full detail in the 'mack-asset_packager' section. 
+</p>
+
+<p>
+  The following are examples on how to use the asset manager:
+  <% code do -%>
+    # each mack application comes with a bundle called defaults
+    # and if you add stuff to this bundle, it will just append
+    # to the existing list.
+    assets_mgr.defaults do |a|
+    
+      # this block basically says, go to the asset_mgr, ask for 
+      # defaults bundle, and to that bundle, add a new javascript file
+      # called foo(.js)
+      a.add_js "foo"
+    end
+    
+    assets_mgr.my_bundle do |a|
+      # this block is saying: I want to access a bundle called my_bundle,
+      # if it doesn't exist create it, and then add 1 javascript file (foo) and
+      # 1 css file to the bundle
+      a.add_js "foo"
+      a.add_css "bar"
+    end
+  <% end -%>
+  
+  How to use the created bundle? In the layout file where you define the stylesheet or javascript tag, you will
+  just refer to the bundle name instead of the individual files.  NOTE: you will have to use the stylesheet and javascript
+  methods to generate the tags in order to take advantage of the asset bundle.  
+  
+  <% code do -%>
+    ...
+    &lt;%= stylesheet 'my_bundle' %>
+    &lt;%= javascript 'my_bundle' %>
+    ...
+  <% end -%>
+  
+  It's nice that we can use the bundle, but can we mix regular asset file along with the bundle name when using the stylesheet/javascript methods?  The answer is yes, and basically when the framework is about to generate the tag, it will try to resolve the bundle name, and if the listed name is not a defined bundle, then it will just treat it as regular asset file.<br>
+  For example: let's say we have the <code>my_bundle</code> bundle, and 2 css files: style1.css and style2.css.  To add those three components, we will do the following:
+  <% code do -%>
+    ...
+    &lt;%= stylesheet ['my_bundle', 'style1', 'style2.css']%>
+    ...
+  <% end -%>
+  
+  The above code will generate 3 stylesheet tags (2 from the explicit css, and 1 from the bundle since the bundle only contain 1 css file)
+</p>
+
