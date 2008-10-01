@@ -6,27 +6,38 @@
   <title><%= page_title %></title>
   <%= stylesheet('macker_guide') %>
   <%= javascript('macker_guide') %>
-  <script type="text/javascript">
-  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-  </script>
-  <script type="text/javascript">
-  var pageTracker = _gat._getTracker("UA-4007638-5");
-  pageTracker._trackPageview();
-  </script>
+  
+  <!-- edge: -->
+  <%= google_analytics('UA-4007638-6') %>
+  <!-- www: -->
+  <%= google_analytics('UA-4007638-5') %>
 </head>
 <body>
-<% if Mack.env == 'production' -%>
+<% if configatron.show_header_footer -%>
 <div id="header">
   <div id="logo">
     <a href="http://www.mackframework.com" title="Mack Framework">Mack Framework</a>
     <h1>A Distributed Ruby Web Application Framework</h1>
   </div>
 </div>
+<div id="nav">
+  <a href="http://www.mackframework.com">home</a>
+  <a href="http://www.mackframework.com/about/" title="about">about</a>
+  <a href="http://www.mackframework.com/archives/" title="archives">archives</a>
+  <a href="http://www.mackframework.com/contribute/" title="contribute">contribute</a>
+  <a href="http://www.mackframework.com/support/" title="support">support</a>
+  <a href="http://www.mackframework.com/user-guide/">user guide</a>
+</div>
 <% end -%>
 
 <div id="wrapper">
 
+  <div id='search'>
+    <% form(search_url) do -%>
+      <%= :query.text_field %>
+      <%= submit_button 'Search' %>
+    <% end -%>
+  </div>
   <div id="toc"><%= render(:partial, 'chapters/toc') %></div>
   <div id="main">
     <h1><%= page_title %></h1>
@@ -42,9 +53,11 @@ dp.SyntaxHighlighter.HighlightAll('code');
 
 <div id='for_version' class='note'>This guide was written for Mack version 0.7.9.100</div>
 
-<% if Mack.env == 'production' -%>
-<div id="footer">
-  <p>&copy; Mack Framework</p>
+<% if configatron.show_header_footer -%>
+<div id='footer_padding'>
+  <div id="footer">
+    <p>&copy; Mack Framework</p>
+  </div>
 </div>
 <% end -%>
 

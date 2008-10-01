@@ -1,0 +1,28 @@
+<% page_title('Blocks in Routes') -%>
+
+<p>It's easy to register a block with a route. The block gets called before the controller and action gets invoked for that route. The block will be passed the following parameters: <code>request</code>, <code>response</code>, and <code>cookies</code>.</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.connect '/i/am/a/runner/block/that/doesnt/finish', :controller => :users, :action => :fun do |request, response, cookies|
+    request.params[:fun] = 'Hell Yeah!'
+  end
+  r.connect '/i/am/a/runner/block/that/finishes' do |request, response, cookies|
+    response.write('Hello')
+    throw :finished
+  end
+end
+<% end -%>
+
+<p>In the first route we defined we set a parameter on the request, <code>:fun</code>, equal to 'Hell Yeah!'. This code block gets evaluated and the then <code>Users#fun</code> gets called.</p>
+
+<p>In the second route we're writing 'Hello' out to the response, and then we <code>throw :finished</code>. When you call that <code>throw :finished</code> line, you're telling Mack not to bother continuing on the request stack and return the response as is. So in this case the client would receive 'Hello' as it's response.</p>
+
+<p>The above routes could also be written like so:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.connect '/i/am/a/runner/block/that/doesnt/finish', :controller => :tst_another, :action => :fun_runner_block, :runner_block => Proc.new({|request, response, cookies| request.params[:fun] = 'Hell Yeah!'})
+  r.connect '/i/am/a/runner/block/that/finishes', :runner_block => Proc.new({|request, response, cookies| response.write('Hello'); throw :finished})
+end
+<% end -%>

@@ -18,10 +18,21 @@ a:hover {
 
 #toc {
   float: right;
+  clear: right;
   border-style: solid;
   margin-left: 10px;
   padding-left: 20px;
   min-width: 250px;
+}
+
+#search {
+  float: right;
+  border-style: solid;
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-top: 10px;
+  min-width: 250px;
+  margin-bottom: 10px;
 }
 
 ul {
@@ -88,6 +99,11 @@ ul {
   font: normal 1.6em "Helvetica Neue", Helvetica, Arial, sans-serif; 
 }
 
+#footer_padding {
+  clear: both;
+  padding-top: 10px;
+}
+
 #footer { 
   padding: 0.8em 0; 
   background: #000; 
@@ -131,4 +147,23 @@ p {
   background-color: #a90000;
   color: white;
   font-weight: bold;
+  font-style: italic;
+}
+
+
+#nav {
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+#nav a {
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 10px 10px 10px;
+}
+
+#nav a:hover {
+  background-color: #a90000;
+  color: white;
 }

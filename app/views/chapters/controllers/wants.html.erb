@@ -1,0 +1,53 @@
+<% page_title('Handling Content Types') -%>
+
+<p>When a request comes in Mack will attempt to determine it's content type based on the extension of the request coming in. For example '/foo.xml' will automatically look up and set the 'Content-Type' header based on the <code>Mack::Utils::MimeTypes</code> registry. By default Mack will assume the type to be 'html'.</p>
+
+<p>It's easy to override the content type for a request, there are a couple ways of doing so:</p>
+
+<% code do -%>
+class UserController
+  include Mack::Controller
+  
+  def download
+    response.content_type = Mack::Utils::MimeTypes[:rtf]
+  end
+  
+end
+<% end -%>
+
+<p>In the above example the content type will be set to 'application/rtf; application/x-rtf; text/richtext'. You obviously don't have to use the <code>Mack::Utilss::MimeTypes</code> registry, but it's a very convenient way of managing your different mime types, and it comes pre-loaded with 450 of them!</p>
+
+<p>You can also set the content type when you call the render method, as such:</p>
+
+<% code do -%>
+class UserController
+  include Mack::Controller
+  
+  def download
+    render(:text, File.read('/path/to/file'), :content_type => 'application/pdf')
+  end
+  
+end
+<% end -%>
+
+<p>Sometimes when when developing you want to be able to handle different content types differently in your actions, that's where the <code>wants</code> method comes in handy.</p>
+
+<% code do -%>
+class UserController
+  include Mack::Controller
+  
+  def download
+    # do common things...
+    wants(:xml) do
+      # do something specific for xml
+    end
+    wants(:js) do
+      # do something specific for javascript
+    end
+    # do common things...
+  end
+  
+end
+<% end -%>
+
+<p>Anything wrapped in a <code>wants</code> block will only be called if that content type has been requested by the end user.</p>

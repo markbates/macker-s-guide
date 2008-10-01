@@ -1,0 +1,31 @@
+<% page_title('Redirecting') -%>
+
+<p>To perform a client side redirect in Mack is quite simple:</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def refer_me
+    redirect_to('/some/other/url')
+  end
+  
+end
+<% end -%>
+
+<p>When a request comes into <code>UsersController#refer_me</code> it will be redirected to '/some/other/url'. Because this is a client side redirect the response is sent down to the client and the client will then make another request to the new url. This also means that the url will change from the original url to the new url.</p>
+
+<p>You can also pass in a <code>:status</code> option to change the HTTP status code for the request.</p>
+
+<p>Mack is also capable of performing server side redirects. The benefit here is that client is not aware that the url has changed:</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def refer_me
+    redirect_to('/some/other/url', :server_side => true)
+  end
+  
+end
+<% end -%>
