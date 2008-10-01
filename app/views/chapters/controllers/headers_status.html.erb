@@ -1,0 +1,48 @@
+<% page_title('Headers/Status') -%>
+
+<h2>Response Headers</h2>
+
+<p>To get/set a response header in Mack you just access the <code>response</code> method in <code>Mack::Controller</code> as if it were a <code>Hash</code>:</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def show
+    response['Content-Type'] = 'text/html'
+    response['Content-Type'] # => 'text/html'
+  end
+  
+end
+<% end -%>
+
+<h2>Response Status</h2>
+
+<p>It's easy to set the status of your response:</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def show
+    response.status = 404
+    render(:text, 'Not Found')
+  end
+  
+end
+<% end -%>
+
+<p>In this example the status of the response will be set to 404. The above could also be written like this:</p>
+
+<% code do -%>
+class UsersController
+  include Mack::Controller
+  
+  def show
+    render(:text, 'Not Found', :status => 404)
+  end
+  
+end
+<% end -%>
+
+<p>Both the <code>render</code> and the <code>redirect_to</code> methods in <code>Mack::Controller</code> take an optional <code>Hash</code> that can contain a <code>:status</code> option.</p>

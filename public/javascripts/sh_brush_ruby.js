@@ -17,6 +17,7 @@ dp.sh.Brushes.Ruby = function()
 		{ regex: dp.sh.RegexLib.DoubleQuotedString,				css: 'string' },	// double quoted strings
 		{ regex: dp.sh.RegexLib.SingleQuotedString,				css: 'string' },	// single quoted strings
 		{ regex: new RegExp(':[a-z][A-Za-z0-9_]*', 'g'),		css: 'symbol' },	// symbols
+		{ regex: new RegExp('\\d\\.?', 'g'),css: 'number'},
 		{ regex: new RegExp('(\\$|@@|@)\\w+', 'g'),				css: 'variable' },	// $global, @instance, and @@class variables
 		{ regex: new RegExp(this.GetKeywords(keywords), 'gm'),	css: 'keyword' },	// keywords
 		{ regex: new RegExp('\s*include', 'gm'),	css: 'keyword' },	// keywords
@@ -24,7 +25,7 @@ dp.sh.Brushes.Ruby = function()
 		];
 
 	this.CssClass = 'dp-rb';
-	this.Style =	'.dp-rb .symbol { color: red; }' +
+	this.Style =	'.dp-rb .symbol { color: red; }' + '.dp-rb .number { color: yellow; }' +
 					'.dp-rb .variable { color: yellow; font-weight: bold; }';
 }
 
