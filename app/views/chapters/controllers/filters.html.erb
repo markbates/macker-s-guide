@@ -33,13 +33,13 @@ class MyAwesomeController
   include Mack::Controller
   
   # all actions in this controller will have this filter run:
-  before_filter: authenticate
+  before_filter :authenticate
   
   # only the show and index actions in this controller will have this filter run:
-  before_filter: load_side_bar, :only => [:show, :index]
+  before_filter :load_side_bar, :only => [:show, :index]
   
   # all actions, except for the create action will have this filter run.
-  after_filter: write_to_log, :except => :create
+  after_filter :write_to_log, :except => :create
 end
   <% end -%>
 </p>
