@@ -19,20 +19,20 @@ a:hover {
 #toc {
   float: right;
   clear: right;
-  border-style: solid;
-  margin-left: 10px;
-  padding-left: 20px;
+  border: 1px solid gray;
+  margin: 0px 0px 0px 10px;
+  padding: 0px 0px 0px 25px;
   min-width: 250px;
 }
 
 #search {
+  background: #f0f0f0;
   float: right;
-  border-style: solid;
-  margin-left: 10px;
-  padding-left: 20px;
-  padding-top: 10px;
+  border: 1px solid gray;
+  padding: 10px 0px 0px 25px;
+  margin: 0px 0px 10px 10px;
   min-width: 250px;
-  margin-bottom: 10px;
+  height: 33px;
 }
 
 ul {
