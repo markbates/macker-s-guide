@@ -1,2 +1,17 @@
 <% page_title 'Asset Host' %>
 
+<p>
+  You can define an asset host for your application.  By default, the application will search the assets in the public folder (e.g. stylesheets will be loaded from public/stylesheets folder), but when an asset host is defined, then stylesheets, images, and javascripts will be loaded from that location instead.
+</p>
+
+<p>
+  To define an asset host, you will need to set <code>configatron.mack.assets.hosts</code> in your configuration file.  The framework will then use that value to determine where to load the assets.
+</p>
+
+<p>
+  The following are all the types of value supported by the asset host configuration:<br>
+<ul>
+  <li>Static host, e.g. <code>configatron.mack.assets.hosts = "http://www.foo.com"</code></li>
+  <li>Asset distribution, e.g. <code>configatron.mack.assets.hosts = "http://www%d.foo.com"</code>.  Note on asset distribution, by default all assets will be distributed across 4 domains (in the example, it will be distributed to www0 to www3).  If preferred, you can set <code >configatron.mack.assets.max_distribution</code> to some other number</li>
+</ul>
+</p>
