@@ -41,43 +41,38 @@ $ rake mack:dump:config
 <p>which will produce something like this:</p>
 
 <% code do -%>
-{
-  :log => {
-    :colors => {
-      :error => :red, 
-      :fatal => :red, 
-      :warn => :yellow, 
-      :completed => :purple, 
-      :db => :cyan
-    }, 
-    :root=>"/Users/markbates/foo/log/", 
-    :detailed_requests => true, 
-    :level => :debug,
-    :disable_initialization_logging => false
-  },
- :default_secret_key => "B56F65GZRSMSPRCF4W6YD4HPJXJBKFA83LYRKW5NANMB8WLSRCADWCMXC7HJ7JB8YW5FH6SYW7FYSHPS",
- :mack => {
-   :disable_transactional_tests => false, 
-   :test_case_file_pattern => "test/**/*_test.rb", 
-   :render_url_timeout => 5, 
-   :cookie_values => {:path=>"/"}, 
-   :path => "/", 
-   :session_store => :cookie, 
-   :cache_classes => false, 
-   :data_mapper_session_store => {:expiry_time => 14400},
-   :cookie_session_store => {:expiry_time => 14400}, 
-   :site_domain => "http://localhost:3000", 
-   :use_lint => true, 
-   :testing_framework => "rspec", 
-   :disable_forgery_detector => false, 
-   :show_exceptions => true, 
-   :assets => {
-     :hosts => "", 
-     :max_distribution => 4
-   }, 
-   :use_sessions => true, 
-   :rspec_file_pattern => "test/**/*_spec.rb", 
-   :session_id => "_foo_session_id"
-  }
-}
+configatron.default_secret_key = "WEBMPJH66FE48QRPNF6CL5FQMGD4TQWLY3NCS847SW4TMD637AFAEYPTMSBCJBSSFRDZ3LNNQCA6Z7NC"
+configatron.mack.assets.hosts = ""
+configatron.mack.assets.max_distribution = 4
+configatron.mack.assets.stamp = 1223056355
+configatron.mack.cache_classes = false
+configatron.mack.cookie_session_store.expiry_time = 14400
+configatron.mack.cookie_values = {:path=>"/"}
+configatron.mack.data_mapper_session_store.expiry_time = 14400
+configatron.mack.deep_class_reload = false
+configatron.mack.disable_forgery_detector = false
+configatron.mack.disable_transactional_tests = false
+configatron.mack.log.colors.completed = :purple
+configatron.mack.log.colors.db = :cyan
+configatron.mack.log.colors.error = :red
+configatron.mack.log.colors.fatal = :red
+configatron.mack.log.colors.warn = :yellow
+configatron.mack.log.detailed_requests = true
+configatron.mack.log.disable_initialization_logging = false
+configatron.mack.log.level = :debug
+configatron.mack.log.root = "/Users/markbates/foo/log"
+configatron.mack.log.time_format = "%Y-%m-%d %H:%M:%S"
+configatron.mack.log.use_colors = true
+configatron.mack.path = "/"
+configatron.mack.reload_classes = 1
+configatron.mack.render_url_timeout = 5
+configatron.mack.rspec_file_pattern = "test/**/*_spec.rb"
+configatron.mack.session_id = "_foo_session_id"
+configatron.mack.session_store = :cookie
+configatron.mack.show_exceptions = true
+configatron.mack.site_domain = "http://localhost:3000"
+configatron.mack.test_case_file_pattern = "test/**/*_test.rb"
+configatron.mack.testing_framework = :rspec
+configatron.mack.use_lint = true
+configatron.mack.use_sessions = true
 <% end -%>
