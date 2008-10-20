@@ -6,10 +6,13 @@
   <title><%= page_title %></title>
   <%= assets_bundle :macker_guide %>
   
-  <!-- edge: -->
-  <%= google_analytics('UA-4007638-6') %>
-  <!-- www: -->
-  <%= google_analytics('UA-4007638-5') %>
+  <% if request.host.match(/edge/) -%>
+    <!-- edge: -->
+    <%= google_analytics('UA-4007638-6') %>
+  <% elsif request.host.match(/www/) -%>
+    <!-- www: -->
+    <%= google_analytics('UA-4007638-5') %>
+  <% end -%>
 </head>
 <body>
 <% if configatron.show_header_footer -%>
