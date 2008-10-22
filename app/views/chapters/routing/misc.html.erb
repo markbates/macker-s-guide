@@ -1,0 +1,69 @@
+<% page_title('Misc. Routing') -%>
+
+<p>There are a few other misc. features in the routing engine.</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.home_page '/', :controller => :default, :action => :index, :host => 'www.example.com'
+  r.admin_home = '/', :controller => :admin, :action => :index, :port => 8080, :host => 'admin.example.com'
+  r.users_home_page '/', :controller => :users, :action => :show_by_username, :host => ':username.example.com'
+  r.resource :users
+  r.login '/login', :controller => :sessions, :action => :new, :scheme => 'https'
+end
+<% end -%>
+
+<p>Let's take these routes line by line and see what features we're looking at.</p>
+
+<% code do -%>
+r.home_page '/', :controller => :default, :action => :index, :host => 'www.example.com'
+<% end -%>
+
+<p>Here we're saying that any request that comes that matches '/' AND the host matches 'www.example.com' send it to <code>DefaultController#index</code>.</p>
+
+<% code do -%>
+home_page_url # => '&lt;current_scheme or http>://www.example.com&lt;:port unless 80 or 443>/'
+<% end -%>
+
+<p>Next...</p>
+
+<% code do -%>
+r.admin_home = '/', :controller => :admin, :action => :index, :port => 8080, :host => 'admin.example.com'
+<% end -%>
+
+<p>Here we're saying that any request that comes that matches '/' AND the host matches 'admin.example.com' AND the port is 8080 send it to <code>AdminController#index</code>.</p>
+
+<% code do -%>
+admin_home_url # => '&lt;current_scheme or http>://admin.example.com:8080/'
+<% end -%>
+
+<p>Next...</p>
+
+<% code do -%>
+r.users_home_page '/', :controller => :users, :action => :show_by_username, :host => ':username.example.com'
+<% end -%>
+
+<p>Here we're saying that any request that comes that matches '/' AND the host matches '*.example.com' send it to <code>UsersController#show_by_username</code>. We're also going to set <code>params[:username] = the value of '*'</code>, so 'http://markbates.example.com' would set <code>params[:username] = 'markbates'</code>.</p>
+
+<% code do -%>
+users_home_page_url(:username => 'markbates') # => '&lt;current_scheme or http>://markbates.example.com&lt;:port unless 80 or 443>/'
+<% end -%>
+
+<p>Next...</p>
+
+<% code do -%>
+r.resource :users
+<% end -%>
+
+<p>The standard resource routing applies here. It should be noted that because no host, port, or scheme is specified that the request will match on ANY host, port, or scheme.</p>
+
+<p>Next...</p>
+
+<% code do -%>
+r.login '/login', :controller => :sessions, :action => :new, :scheme => 'https'
+<% end -%>
+
+<p>Here we're saying that any request that comes that matches '/login' AND the scheme matches 'https' send it to <code>SessionsController#new</code>.</p>
+
+<% code do -%>
+login_url # => 'https://&lt;current_host>&lt;:port unless 80 or 443>/login'
+<% end -%>

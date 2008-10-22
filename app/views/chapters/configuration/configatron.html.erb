@@ -41,17 +41,15 @@ $ rake mack:dump:config
 <p>which will produce something like this:</p>
 
 <% code do -%>
-configatron.default_secret_key = "WEBMPJH66FE48QRPNF6CL5FQMGD4TQWLY3NCS847SW4TMD637AFAEYPTMSBCJBSSFRDZ3LNNQCA6Z7NC"
+configatron.default_secret_key = "3YGAQQ88P437KRPCNLEXWBJK8NF8DPL8NPNETK5LLABMAHZ4GAPWZAA5QEHQQ7RTELRAGP4NKBJHZZP3"
 configatron.mack.assets.hosts = ""
 configatron.mack.assets.max_distribution = 4
-configatron.mack.assets.stamp = 1223056355
+configatron.mack.assets.stamp = 1224688724
 configatron.mack.cache_classes = false
 configatron.mack.cookie_session_store.expiry_time = 14400
 configatron.mack.cookie_values = {:path=>"/"}
-configatron.mack.data_mapper_session_store.expiry_time = 14400
 configatron.mack.deep_class_reload = false
 configatron.mack.disable_forgery_detector = false
-configatron.mack.disable_transactional_tests = false
 configatron.mack.log.colors.completed = :purple
 configatron.mack.log.colors.db = :cyan
 configatron.mack.log.colors.error = :red
@@ -64,6 +62,9 @@ configatron.mack.log.root = "/Users/markbates/foo/log"
 configatron.mack.log.time_format = "%Y-%m-%d %H:%M:%S"
 configatron.mack.log.use_colors = true
 configatron.mack.path = "/"
+configatron.mack.portlet.need_tar = false
+configatron.mack.portlet.need_zip = false
+configatron.mack.portlet.verbose = false
 configatron.mack.reload_classes = 1
 configatron.mack.render_url_timeout = 5
 configatron.mack.rspec_file_pattern = "test/**/*_spec.rb"
@@ -71,8 +72,9 @@ configatron.mack.session_id = "_foo_session_id"
 configatron.mack.session_store = :cookie
 configatron.mack.show_exceptions = true
 configatron.mack.site_domain = "http://localhost:3000"
+configatron.mack.static_paths = ["/css", "/images", "/files", "/images", "/stylesheets", "/javascripts", "/media", "/favicon.ico"]
 configatron.mack.test_case_file_pattern = "test/**/*_test.rb"
-configatron.mack.testing_framework = :rspec
+configatron.mack.testing_framework = "rspec"
 configatron.mack.use_lint = true
 configatron.mack.use_sessions = true
 <% end -%>

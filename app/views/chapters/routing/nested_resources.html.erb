@@ -1,0 +1,32 @@
+<% page_title('Nested Resource Routes') -%>
+
+<p>You can easily nest resources in routes. Here's an example:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.resource :universes do |u|
+    u.resource :planets do |p|
+      p.foo 'foo'
+      p.resource :moons, :controller => :moonies
+    end
+  end
+end
+<% end -%>
+
+<p>Let's take the most deeply nested resource, moons. The matching path for <code>MooniesController#show</code> would look something like this: <code>/universes/:universe_id/planets/:planet_id/moons/:id</code>.</p>
+
+<% code do -%>
+moons_show_url(:id => 1, :universe_id => 'milky_way', :planet_id => 'earth') # => '/universes/milky_way/planets/earth/moons/1'
+<% end -%>
+
+<p>Our routing example will create the same url helper methods as if you had done the following:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.resource :universes
+  r.resource :planets do |p|
+    p.foo 'foo'
+  end
+  r.resource :moons, :controller => :moonies
+end
+<% end -%>
