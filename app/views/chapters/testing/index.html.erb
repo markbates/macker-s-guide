@@ -1,0 +1,47 @@
+<% page_title "Testing Framework"%>
+
+<p>
+  When a new Mack application is generated, its testing framework is default to rspec.  If you prefer, you could generate your application and set the testing framework to the Test::Unit::TestCase, by doing <code>%%> mack my_new_application -t test_case</code>.
+</p>
+
+<p>
+  To run the test suite of your application, all you have to do is run the rake command from the root of your application.  Let's see some example: (assuming that we're using the default test framework, rspec)
+  
+<% code do -%>
+# generate a new mack app
+%> mack foo
+
+# go into the newly generated app directory
+%> cd foo
+
+# run the test suite
+%> rake
+
+# and you should see the following result:
+DEBUG:	[2008-10-22 12:50:20]	Initializing 'custom gem Rake tasks' ...
+Dropping (SQLite3): /Users/dsutedja/foo/db/foo_test.db
+Creating (SQLite3): /Users/dsutedja/foo/db/foo_test.db
+mkdir -p /Users/dsutedja/foo/db
+touch /Users/dsutedja/foo/db/foo_test.db
+
+
+DefaultController
+- should be able to successfully connect to home page
+
+Finished in 0.240053 seconds
+
+1 example, 0 failures
+Loaded suite /usr/local/bin/rake
+Started
+
+Finished in 0.000192 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+%> |
+<% end -%>
+</p>
+
+<p>
+  Head to the next chapter to learn more about testing using <%= chapter('rspec', 'testing/rspec') %> and <%= chapter('Test::Unit::TestCase', 'testing/test_case') %>
+</p>
