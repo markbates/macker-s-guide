@@ -1,0 +1,37 @@
+<% page_title('Sessions') -%>
+
+<p>The default session store for Mack applications is <code>Mack::SessionStore::Cookie</code>. This uses encrypted cookies to store the session. If the session cookie can't be decrypted it will be deleted and a new session will be started.</p>
+
+<p>There are 3 parameters that govern sessions as a whole in Mack, and one one that governs the cookie session store.</p>
+
+<% code do -%>
+# This should be set by your application so that ALL instances of your application are using
+# the same secret key. If you do not set it a random key will be generated each time you start
+# your application.
+configatron.default_secret_key
+
+# This sets which session store you would like to use, :cookie, is the default.
+configatron.mack.session_store
+
+# True/False turns on/off sessions for your entire Mack application, true is the default.
+configatron.mack.use_sessions
+
+# Sets the expiry time of the cookie. The default is 4 hours.
+configatron.mack.cookie_session_store.expiry_time
+<% end -%>
+
+<p>The session can be retrieved off of the <code>Mack::Request</code> class, like such:</p>
+
+<% code do -%>
+request.session # => Mack::Session
+<% end -%>
+
+<p>In controllers and views it can be retrieved with the <code>session</code> method.</p>
+
+<p>The <code>Mack::Session</code> behaves slightly like a <code>Hash</code> attributes can be set and retrieved on the session like such:</p>
+
+<% code do -%>
+@user = User.new(:id => 1)
+session[:user_id] = @user.id
+session[:user_id] # => 1
+<% end -%>
