@@ -1,0 +1,39 @@
+<% page_title "Assets Packager" %>
+
+<p>
+  As described in <%= chapter('Assets Management', 'views/asset_mgr')%>, you can easily create groups for javascript/stylesheet asset files for your application.  And to refer to the defined group(s), all you have to do is specify the name when calling the stylesheet or javascript method, e.g. <code><%%= stylesheet 'my_bundle' %></code>
+</p>
+
+<p>
+  What that does internally is it will expand the group name into multiple reference to the stylesheet or javascript files.  And this could be inefficient for your application.  This gem will be perfect complement to the asset manager; when included, it will package up (including performing data compression) all the asset files defined in a group, and make a single reference to the group name, so this way the browser will only make single request to get the asset file instead of n number of requests for the asset files.
+</p>
+
+<p>
+  But what happen if you want to turn off the packaging?  Well two things you could do: first the obvious one, remove this gem from your application.  The second one is that there's a configuration that you can use to disable the packaging--<code>configatron.mack.assets.enable_bundle_merge</code>.  By default, this is turned on in production mode, and off in other environment.  Use this flag to turn on and off the packager.
+</p>
+
+<p>
+  So, here're the steps to setup your application to use the asset packager:
+<% code do -%>
+# first, include the packager gem to your application.
+# in config/initializers/gem.rb file add the following line of code
+gem.add "mack-asset_packager", :libs => "mack-asset_packager"
+
+# then, define assets group as described in the 'Assets Management' chapter.
+# For example, let's define the following group in config/initializers/assets.rb
+assets_mgr.my_bundle do |a|
+  a.add_css "first_css"
+  a.add_css "second_css"
+  a.add_js "first_js"
+  a.add_js "second_js"
+end
+
+# now that you have both things setup, then in your view file where 
+# you refer to the stylesheet/javascript asset files, make sure you change them to refer
+# to the asset bundle
+# For example: in the application.html.erb file, you could do the following:
+<%%= stylesheet "my_bundle" %>
+<% end -%>
+</p>
+
+
