@@ -1,0 +1,29 @@
+<% page_title "Navigating through Mack Application" %>
+
+<p>
+  As described in <%= chapter('previous chapter', 'the_basics/hello_world') %>, in your first mack application, there are many files and folders that got generated.
+</p>
+
+<p>
+  There will be many instances where you want to access files in your application folder (e.g. views, static files, etc.)  Of course, you can do it using regular ruby path navigation (i.e. File.join(File.dirname(__FILE__), ...)), but it would make your code look not as clean as it could be.  
+</p>
+
+<p>
+  For that particular reason, we've built a utility module that you can use to access all the well known paths to your application.  Here're some example:
+  
+<% code do -%>
+# NOTE: The paths are defined in Mack::Paths.  Use that module to get the path
+# to a specific location in your application.
+# Also note that all the methods in Mack::Paths takes an array of strings, which will
+# be used to build the final file path.
+
+Mack::Paths.public # => {APP_ROOT}/public
+Mack::Paths.public("javascripts") # => {APP_ROOT}/public/javascripts
+Mack::Paths.images # => {APP_ROOT}/public/images
+Mack::Paths.images("foo.jpg") # => {APP_ROOT}/public/images/foo.jpg
+<% end -%>
+</p>
+
+<p>
+  For complete set of API for <code>Mack::Paths</code>, please visit <%= link_to "Mack Paths API", "http://api.mackframework.com/mack/classes/Mack/Paths.html" %>
+</p>
