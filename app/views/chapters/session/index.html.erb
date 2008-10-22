@@ -19,3 +19,19 @@ configatron.mack.use_sessions
 # Sets the expiry time of the cookie. The default is 4 hours.
 configatron.mack.cookie_session_store.expiry_time
 <% end -%>
+
+<p>The session can be retrieved off of the <code>Mack::Request</code> class, like such:</p>
+
+<% code do -%>
+request.session # => Mack::Session
+<% end -%>
+
+<p>In controllers and views it can be retrieved with the <code>session</code> method.</p>
+
+<p>The <code>Mack::Session</code> behaves slightly like a <code>Hash</code> attributes can be set and retrieved on the session like such:</p>
+
+<% code do -%>
+@user = User.new(:id => 1)
+session[:user_id] = @user.id
+session[:user_id] # => 1
+<% end -%>
