@@ -1,0 +1,23 @@
+<% page_title 'Packaging a Portlet' -%>
+
+<p>Packaging a Mack Portlet is quite simple. There are a few Rake tasks that help ease the process:</p>
+
+<% code(:cl) do -%>
+$ rake mack:portlet:prepare
+$ rake mack:portlet:package
+$ rake mack:portlet:install
+<% end -%>
+
+<p>The <code>mack:portlet:prepare</code> task will generate two files for you:</p>
+
+<% code(:fs) do -%>
+porlet_config/
+  porlet.spec
+README
+<% end -%>
+
+<p>The <code>README</code> file is there to be the README for you Portlet gem. The <code>portlet.spec</code> is the Ruby Gem spec file needed for your gem. Feel free and edit this to rename your Portlet gem, add dependencies, etc... </p>
+
+<p>The <code>mack:portlet:package</code> task builds your Portlet gem. This gem is now ready for distribution. This task calls the <code>mack:portlet:prepare</code> task first.</p>
+
+<p>The <code>mack:portlet:install</code> task calls <code>mack:portlet:package</code> first, and then installs the resulting gem for you.</p>

@@ -1,0 +1,12 @@
+<% page_title 'Using a Portlet' -%>
+
+<p>To use a Mack Portlet in your Mack application, is very simple. Simply add the Portlet to your <code>config/initializers/portlets.rb</code> file like so:</p>
+
+<% code do -%>
+require_portlets do |p|
+  p.add :my_cool_portlet
+  p.add :another_portlet, :version => '2.1.2'
+end
+<% end -%>
+
+<p>The <code>require_portlets</code> method behaves in a similar fashion to the <code>require_gems</code> method. Under the covers it actually calls this method. Because of this the <code>add</code> method takes the exact same parameters as it does under the <code>require_gems</code> method.</p>

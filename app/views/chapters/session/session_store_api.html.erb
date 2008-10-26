@@ -1,0 +1,52 @@
+<% page_title 'Session Store API' -%>
+
+<p>Writing a custom session store for Mack is pretty simple. Let's build a simple store that uses the file system to persist the sessions. There are four class level methods that need to be implemented and the <code>Mack::SessionStore::Base</code> class needs to be extended.</p>
+
+<% code do -%>
+module Mack
+  module SessionStore
+    class MyCustomFileStore < Mack::SessionStore::Base
+
+      class << self
+        
+        # Returns the Mack::Session object if the session file exists.
+        # If it does not exist return nil.
+        def get(id, request, response, cookies)
+          session_file = Mack::Paths.tmp('sessions', id)
+          if File.exists?(session_file)
+            return Marshal.load(File.read(session_file))
+          end
+          return nil
+        end
+        
+        # Save the session to disk.
+        def set(id, request, response, cookies)
+          session_file = Mack::Paths.tmp('sessions', id)
+          FileUtils.mkdir_p(Mack::Paths.tmp('sessions'))
+          File.open(session_file, 'w') {|f| f.puts Marshal.dump(request.session)}
+        end
+        
+        # Expire the session by deleting the session file.
+        def expire(id, request, response, cookies)
+          FileUtils.rm_rf(Mack::Paths.tmp('sessions', id))
+        end
+        
+        # Delete all the sessions from disk.
+        def expire_all(request, response, cookies)
+          FileUtils.rm_rf(Mack::Paths.tmp('sessions'))
+        end
+      
+      end
+      
+    end # MyCustomFileStore
+  end # SessionStore
+end # Mack
+<% end -%>
+
+<p>Now all the needs to be done is tell Mack to use this session store. This can be done with a configuration setting like this:</p>
+
+<% code do -%>
+configatron.mack.session_store = :my_custom_file_store
+<% end -%>
+
+<p class='note'>Please note that although this example does actually work, it hasn't be tested thoroughly, so if you use it, please understand that there might be issues. For example, there is no code in this example that expires a session after a certain time, nor is the file encrypted, which it probably should be.</p>
