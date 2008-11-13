@@ -167,3 +167,8 @@ p {
   background-color: #a90000;
   color: white;
 }
+
+.quote {
+  font-style: italic;
+  font-family: "American Typewriter", "Trebuchet MS", Verdana, sans-serif; ;
+}

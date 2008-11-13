@@ -1,0 +1,28 @@
+<% page_title('Deferred? Routes') -%>
+
+<p>The best description of 'deferred' requests came from Ezra Zygmuntowicz back in April on his blog: <%= simple_link('http://brainspl.at/articles/2008/04/18/deferred-requests-with-merb-ebb-and-thin') %>. Here is a quick snippet of that post:</p>
+
+<p class='quote'>"There is a classic tradeoff between threaded servers and event driven servers. Event driven servers tend to be much faster than threaded servers when all the requests are fairly fast. But the event model falls down if you have long requests like file uploads or reporting actions. This is because the long action blocks the event loop, effectively keeping other requests from running.</p>
+
+<p class='quote'>There are two new event driven ruby webservers at your disposal these days, Thin and Ebb. Both of these servers support the Rack web server interface that <strong>Mack</strong> uses. Until now both of these servers were not the best choice for file uploads or long blocking actions but that’s all changing.</p>
+
+<p class='quote'>Both ebb and thin have added a deferred?(env) method to their rack adapter interface. Both webservers will call this method on your Rack @app object before they call your call(env) method. This allows your rack adapter to determine if the request should be run in its own thread if it’s slow."</p>
+
+<p>Merb was changed to Mack in the above quote, but otherwise it is completely unchanged. Mack now supports deferred? requests, and it does so very very easily.</p>
+
+<p>By default deferred? routes are turned off in Mack. This is because using deferred? routes can be a bit of a performance hinderance as it needs to check the deferred? routes list first to see if the incoming request is deferred? or not. It's important to note that the list of deferred? routes is only as long as the amount of deferred? routes you've declared, so it's not really a big performance hit, but why take the hit if you don't need it. Turning it on is very simple:</p>
+
+<% code do -%>
+configatron.mack.use_deferred_routes = true
+<% end -%>
+
+<p>Now that we've turned it on, let's put it into use.</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.i_am_deferred '/i/am/deferred', :controller => :default, :action => :index, :deferred? => true, :method => :post
+  r.i_am_not_deferred '/i/am/not/deferred', :controller => :default, :action => :index
+end
+<% end -%>
+
+<p>As we can see the 'i_am_deferred' route will be deferred and the 'i_am_not_deferred' will not be. Just set the <code>:deferred?</code> option to true, and that's all there is to it.</p>
