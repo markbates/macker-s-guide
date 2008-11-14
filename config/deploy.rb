@@ -57,16 +57,16 @@ end
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     # sudo "thin restart -s 3 -e production -c /home/#{user}/#{application}/current/"
-    sudo "thin restart #{start_command}"
+    # sudo "thin restart #{start_command}"
   end
-  task :start, :roles => :app do
-    sudo "thin start #{start_command}"
-    # sudo "cd /home/#{user}/#{application}/current; mackery server start #{start_command}"
-  end
-  task :stop, :roles => :app do
-    sudo "thin stop #{start_command}"
-    # sudo "cd /home/#{user}/#{application}/current; mackery server stop #{start_command}"
-  end
+  # task :start, :roles => :app do
+  #   sudo "thin start #{start_command}"
+  #   # sudo "cd /home/#{user}/#{application}/current; mackery server start #{start_command}"
+  # end
+  # task :stop, :roles => :app do
+  #   sudo "thin stop #{start_command}"
+  #   # sudo "cd /home/#{user}/#{application}/current; mackery server stop #{start_command}"
+  # end
   
   task :migrate, :roles => :db, :only => { :primary => true } do
     rake = fetch(:rake, "rake")
@@ -108,5 +108,13 @@ end
 # after "deploy:cleanup", "reload_nginx"
 # after "restart_thin", "reload_nginx"
 
-after "deploy", "reload_nginx"
+# after "deploy", "reload_nginx"
+namespace :passenger do
+  desc "Restart Application"
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
+after :deploy, "passenger:restart"
 # after "deploy:update_code", "gems:install"
