@@ -55,10 +55,10 @@ task :reload_nginx do
 end
 
 namespace :deploy do
-  # task :restart, :roles => :app, :except => { :no_release => true } do
-  #   # sudo "thin restart -s 3 -e production -c /home/#{user}/#{application}/current/"
-  #   sudo "thin restart #{start_command}"
-  # end
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    # sudo "thin restart -s 3 -e production -c /home/#{user}/#{application}/current/"
+    # sudo "thin restart #{start_command}"
+  end
   # task :start, :roles => :app do
   #   sudo "thin start #{start_command}"
   #   # sudo "cd /home/#{user}/#{application}/current; mackery server start #{start_command}"
