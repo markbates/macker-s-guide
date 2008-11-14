@@ -40,7 +40,7 @@ PassengerRuby /opt/local/bin/ruby
 
 <% code(:text) do -%>
 ## Sample virtual host ##
-<VirtualHost *:80>
+<VirtualHost *>
     ServerName www.example.com
     DocumentRoot "/path/to/your/mack/app/public"
 </VirtualHost>
@@ -53,7 +53,7 @@ PassengerRuby /opt/local/bin/ruby
 127.0.0.1 www.example.com
 <% end -%>
 
-<p>Because of an incompatibility with Rack and Passenger you'll need to disable the use of Rack::Lint. This can be done in your config/configatron/default.rb like such:</p>
+<p>Because of an incompatibility with Rack and Passenger (this is not an issue with Mack >=0.8.2) you'll need to disable the use of Rack::Lint. This can be done in your config/configatron/default.rb like such:</p>
 
 <% code do -%>
 configatron.mack.use_lint = false
