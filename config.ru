@@ -1,4 +1,4 @@
-ENV["MACK_ENV"] = 'development'
+ENV["MACK_ENV"] = ENV['RACK_ENV']
 require 'rubygems'
 load("Rakefile")
 require 'mack'
