@@ -26,3 +26,14 @@ end
 <% end -%>
 
 <p>As we can see the 'i_am_deferred' route will be deferred and the 'i_am_not_deferred' will not be. Just set the <code>:deferred?</code> option to true, and that's all there is to it.</p>
+
+<p>Deferred routes can also be used in conjunction with resourced routes as well:</p>
+
+<% code do -%>
+Mack::Routes.build do |r|
+  r.resource :users, :deferred? => true
+  r.resource :people, :deferred? => [:new, :index, :delete]
+end
+<% end -%>
+
+<p>In the first example we say <code>:deferred? => true</code> that is the same as if we had done <code>:deferred? => [:create, :update]</code>. The <code>Array</code> of actions will be added to the deferred routes list.</p>
