@@ -1,0 +1,14 @@
+<% page_title('Haml') -%>
+
+<p><%= simple_link('Haml', 'http://haml.hamptoncatlin.com/') %> is a markup language that claims to live by one simple principle, 'Markup should be beautiful.' Using Haml with Mack, is pretty darn easy, and beautiful.</p>
+
+<p>First we need to require the mack-haml gem:</p>
+
+<% code do -%>
+# config/initializers/gems.rb
+require_gems do |gem|
+  gem.add "mack-haml", :libs => "mack-haml"
+end
+<% end -%>
+
+<p>Now, instead of using <code>.erb</code> as the file extension to your views use <code>.haml</code> and all should be right with the world.</p>

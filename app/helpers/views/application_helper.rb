@@ -8,12 +8,12 @@ module Mack
       
       def toc(id)
         if File.exists?(Mack::Paths.views('chapters', id.to_s, '_toc.html.erb'))
-          sid = "#{id}_toc"
+          sid = "##{id}_toc"
           val = '['
-          val << link_to_function('+/-', js.toggle(sid))
+          val << link_to_function('+/-', js.select(sid).toggle)
           val << ']'
           val << render(:partial, "chapters/#{id}/toc")
-          val << update_page {|p| p.hide(sid)} unless request.fullpath.match(/\/#{id}/)
+          val << update_page {|p| p.select(sid).hide} unless request.fullpath.match(/\/#{id}/)
           return val
         end
         return ''
